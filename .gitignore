@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# JavaScript dependencies and package-manager state
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+# Framework build output
+.next/
+.nuxt/
+.output/
+.astro/
+.svelte-kit/
+dist/
+build/
+out/
+
+# Hosting and local platform state
+.vercel/
+.wrangler/
+.netlify/
+
+# Test, coverage, and browser artifacts
+coverage/
+playwright-report/
+test-results/
+.playwright-mcp/
+.codex-log/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
