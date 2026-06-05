@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ProjectViewer } from "@/components/ProjectViewer";
 import { getProjectBySlug, projects } from "@/lib/content";
 
 type ProjectPageProps = {
@@ -41,10 +41,5 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return (
-    <main className="project-page">
-      <h1>{project.title}</h1>
-      <Link href="/">Return home</Link>
-    </main>
-  );
+  return <ProjectViewer project={project} projects={projects} />;
 }
