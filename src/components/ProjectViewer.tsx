@@ -1,10 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
 import type { ProjectMeta } from "@/lib/content";
+import {
+  clearRouteTransitionClasses,
+  consumeRouteTransitionIntent,
+  getRouteTransitionDelay,
+  readRouteTransitionIntent,
+  shouldHandleRouteTransitionClick,
+  startRouteTransition
+} from "@/lib/routeTransitions";
 
 type ProjectViewerProps = {
   project: ProjectMeta;
@@ -24,8 +34,57 @@ function getPrefersReducedMotion() {
 }
 
 export function ProjectViewer({ project, projects }: ProjectViewerProps) {
+  const router = useRouter();
   const viewerRef = useRef<HTMLDivElement>(null);
+  const handledIntentRef = useRef<string | null>(null);
+  const renderedSlugRef = useRef<string | null>(null);
   const [activeSection, setActiveSection] = useState(sections[0].id);
+  const [entryTransition, setEntryTransition] = useState<
+    "none" | "from-home" | "from-project"
+  >("none");
+  const [transitionDirection, setTransitionDirection] = useState<1 | -1>(1);
+  const [switchingProjectSlug, setSwitchingProjectSlug] = useState<
+    string | null
+  >(null);
+
+  useEffect(() => {
+    const intent = readRouteTransitionIntent();
+
+    if (!intent) {
+      if (renderedSlugRef.current !== project.slug) {
+        setEntryTransition("none");
+        setSwitchingProjectSlug(null);
+      }
+
+      renderedSlugRef.current = project.slug;
+      clearRouteTransitionClasses();
+      return;
+    }
+
+    if (handledIntentRef.current === intent.id) {
+      clearRouteTransitionClasses();
+      return;
+    }
+
+    handledIntentRef.current = intent.id;
+    renderedSlugRef.current = project.slug;
+
+    if (intent.kind === "home-to-project" && intent.to === project.slug) {
+      setEntryTransition("from-home");
+    } else if (
+      intent.kind === "project-to-project" &&
+      intent.to === project.slug
+    ) {
+      setTransitionDirection(intent.direction ?? 1);
+      setEntryTransition("from-project");
+    } else {
+      setEntryTransition("none");
+    }
+
+    setSwitchingProjectSlug(null);
+    consumeRouteTransitionIntent();
+    clearRouteTransitionClasses();
+  }, [project.slug]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
@@ -78,7 +137,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
   }, [project.slug]);
 
   function handleRailClick(
-    event: React.MouseEvent<HTMLAnchorElement>,
+    event: MouseEvent<HTMLAnchorElement>,
     sectionId: string
   ) {
     event.preventDefault();
@@ -98,13 +157,79 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     });
   }
 
+  function handleHomeClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (!shouldHandleRouteTransitionClick(event)) {
+      return;
+    }
+
+    event.preventDefault();
+    startRouteTransition({
+      from: project.slug,
+      kind: "project-to-home"
+    });
+
+    window.setTimeout(() => router.push("/"), getRouteTransitionDelay());
+  }
+
+  function handleProjectClick(
+    event: MouseEvent<HTMLAnchorElement>,
+    targetProject: ProjectMeta
+  ) {
+    if (!shouldHandleRouteTransitionClick(event)) {
+      return;
+    }
+
+    if (targetProject.slug === project.slug) {
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+
+    const currentIndex = projects.findIndex((item) => item.slug === project.slug);
+    const targetIndex = projects.findIndex(
+      (item) => item.slug === targetProject.slug
+    );
+    const direction: 1 | -1 = targetIndex > currentIndex ? 1 : -1;
+
+    setSwitchingProjectSlug(targetProject.slug);
+    startRouteTransition({
+      direction,
+      from: project.slug,
+      kind: "project-to-project",
+      to: targetProject.slug
+    });
+
+    window.setTimeout(
+      () => router.push(`/projects/${targetProject.slug}/`),
+      getRouteTransitionDelay()
+    );
+  }
+
   return (
-    <main className="project-view-page">
+    <main
+      className={[
+        "project-view-page",
+        entryTransition === "from-home"
+          ? "project-view-page--from-home"
+          : undefined,
+        entryTransition === "from-project"
+          ? "project-view-page--from-project"
+          : undefined
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={
+        {
+          "--project-entry-shift": `${transitionDirection * 18}px`
+        } as CSSProperties & Record<"--project-entry-shift", string>
+      }
+    >
       <header className="project-view-chrome">
-        <Link href="/" className="project-view-name">
+        <Link href="/" className="project-view-name" onClick={handleHomeClick}>
           Rusty Meadows
         </Link>
-        <Link href="/" className="project-view-home">
+        <Link href="/" className="project-view-home" onClick={handleHomeClick}>
           Home
         </Link>
       </header>
@@ -212,7 +337,10 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
             <Link
               className={[
                 "project-picker__item",
-                isActive ? "project-picker__item--active" : undefined
+                isActive ? "project-picker__item--active" : undefined,
+                switchingProjectSlug === item.slug
+                  ? "project-picker__item--switching"
+                  : undefined
               ]
                 .filter(Boolean)
                 .join(" ")}
@@ -220,6 +348,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
               aria-current={isActive ? "page" : undefined}
               aria-label={`Open ${item.title}`}
               key={item.slug}
+              onClick={(event) => handleProjectClick(event, item)}
             >
               <ProjectStack className="project-picker__stack" />
               <span className="project-picker__title">{item.title}</span>
