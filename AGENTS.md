@@ -2,15 +2,19 @@
 
 ## Repository Mission
 
-This repo is for a new personal website. The app will likely become a static or mostly static JavaScript site, such as a Next, Vue/Nuxt, Astro, SvelteKit, or similar build, and will likely deploy to a traditional static/frontend host such as Cloudflare or Vercel.
+This repo is for a new personal website built as a static-exported Next.js app and deployed through Cloudflare Pages.
 
-Those choices are not finalized. Do not treat a framework, package manager, hosting provider, CSS system, CMS, analytics tool, or content source as selected until the user explicitly chooses it or the repo records the decision.
+The site is intentionally simple: a homepage, repo-backed MDX project pages, and a local-only DialKit playground for future typography/style tuning. There is no CMS framework, database, Vercel database, WYSIWYG library, or server-backed editing surface.
+
+The bootstrap should stay visually bare until the user explicitly asks for design work: black text, white background, no decorative cards, gradients, shadows, large hero treatments, animation polish, Tailwind, shadcn, or UI kit.
 
 ## Current State
 
-- The repository is intentionally docs-first.
-- No application framework has been scaffolded yet.
-- The current work is to preserve a strong agentic workflow before technical choices harden.
+- The repository contains a Next.js App Router site configured for static export.
+- Content lives in `content/home.mdx` and `content/projects/*.mdx`.
+- Project routes are generated from the explicit registry in `src/lib/content.ts`.
+- `/playground` is for local development only and returns not-found in production builds.
+- Styling is intentionally minimal black-and-white CSS for readable document flow.
 
 ## Durable Context
 
@@ -29,11 +33,14 @@ Read these before non-trivial work:
 - Start with repo context: inspect relevant files and check `git status --short --branch`.
 - Keep a meaningful task list visible in Codex for multi-step work, and update it as work progresses.
 - Preserve user changes. Never revert unrelated edits unless the user explicitly asks.
+- Do not create or switch branches/worktrees unless the user explicitly asks for that. When asked to implement in this repo, work on the current branch.
 - Keep changes tightly scoped to the request.
 - Prefer `rg` and `rg --files` for search.
 - Use structured parsers and framework conventions once a framework exists.
 - Use `apply_patch` for manual file edits.
-- Do not scaffold a framework, add deployment config, choose a package manager, add a CMS, or install production dependencies until the user asks or the choice is recorded in `docs/DECISIONS.md`.
+- Do not add a CMS framework, database, server actions, route handlers, middleware, Vercel database, or WYSIWYG/editor library unless the user explicitly asks.
+- Do not add visual design, decorative layout, animation, Tailwind, shadcn, or UI-kit styling unless the user explicitly asks for a design pass.
+- Keep the app static-export compatible for Cloudflare Pages.
 - Keep `AGENTS.md` concise. Put product, planning, workflow, or long-lived detail in supporting docs and link to it.
 
 ## Planning And Status
@@ -77,15 +84,44 @@ Do not claim a UI change is complete without browser verification. If the in-app
 
 - Prefer a simple static-first architecture unless the site needs server behavior.
 - Keep the first screen as the real personal site experience, not a marketing placeholder.
-- Design should feel personal, sharp, accessible, responsive, and fast.
-- Use real visual assets or intentional generated assets when the site experience needs imagery.
+- Design direction is intentionally deferred; keep the current bootstrap bare until a design pass is requested.
+- Use real visual assets or intentional generated assets only when the user asks for imagery or design work.
 - Keep performance, semantic HTML, keyboard usability, and metadata/SEO in view from the start.
 
 ## Commands
 
-No project commands exist yet.
+Setup:
 
-When the framework is chosen, update this section with exact setup, dev, test, lint, format, build, and preview commands.
+```sh
+npm install
+```
+
+Run locally:
+
+```sh
+npm run dev
+```
+
+Verify:
+
+```sh
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Preview static export after `npm run build`:
+
+```sh
+npm run preview:static
+```
+
+Cloudflare Pages settings:
+
+- Build command: `npm run build`
+- Output directory: `out`
+- Production branch: `main`
+- Node version: use `.nvmrc` (`22`)
 
 ## Security
 

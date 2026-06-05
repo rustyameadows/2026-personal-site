@@ -10,8 +10,8 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [x] Create an early site brief.
 - [x] Record useful subagent guidance.
 - [x] Record Codex in-app browser verification as required for UI work.
-- [ ] Update commands after a framework is selected.
-- [ ] Add repo-specific browser smoke checklist after the first route exists.
+- [x] Update commands after a framework is selected.
+- [x] Add repo-specific browser smoke checklist after the first route exists.
 
 ## Product And Content
 
@@ -20,12 +20,14 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [ ] Draft first-pass sitemap or page sections.
 - [ ] Inventory existing projects, writing, images, links, and artifacts.
 - [ ] Decide what content must exist for the first public version.
-- [ ] Decide whether content should live in Markdown/MDX, a CMS, local data files, or another source.
+- [x] Decide whether content should live in Markdown/MDX, a CMS, local data files, or another source.
+- [ ] Replace starter homepage copy with real copy.
+- [ ] Replace starter project with real project content.
 
 ## Design Direction
 
 - [ ] Define the desired tone and visual personality.
-- [ ] Gather references or constraints for typography, color, motion, imagery, and interaction.
+- [ ] Gather future design references or constraints after the bare bootstrap is accepted.
 - [ ] Decide how much experimentation or play belongs in the first version.
 - [ ] Define accessibility and responsive design expectations.
 - [ ] Establish an asset strategy for photos, screenshots, generated imagery, video, and icons.
@@ -33,16 +35,16 @@ This backlog tracks the personal site and the agentic workflow around it.
 ## Framework And Tooling
 
 - [ ] Compare likely static-site builders against site needs.
-- [ ] Choose framework/static builder.
-- [ ] Choose package manager and Node version.
-- [ ] Choose TypeScript or JavaScript.
-- [ ] Choose styling approach.
+- [x] Choose framework/static builder.
+- [x] Choose package manager and Node version.
+- [x] Choose TypeScript or JavaScript.
+- [x] Choose styling approach.
 - [ ] Choose image optimization strategy.
 - [ ] Add formatting, linting, testing, and build checks.
 
 ## Hosting And Deployment
 
-- [ ] Choose hosting provider.
+- [x] Choose hosting provider.
 - [ ] Decide domain and DNS path.
 - [ ] Add deployment configuration.
 - [ ] Add preview deployment workflow.
@@ -51,12 +53,12 @@ This backlog tracks the personal site and the agentic workflow around it.
 
 ## App Foundation
 
-- [ ] Scaffold the selected app.
-- [ ] Add base layout, metadata, and route structure.
-- [ ] Add first content sections.
-- [ ] Add responsive navigation if needed.
+- [x] Scaffold the selected app.
+- [x] Add base layout, metadata, and route structure.
+- [x] Add first content sections.
+- [x] Add responsive navigation if needed.
 - [ ] Add contact or outbound-link behavior.
-- [ ] Add browser smoke verification for initial routes.
+- [x] Add browser smoke verification for initial routes.
 
 ## Quality
 

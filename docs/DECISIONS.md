@@ -26,7 +26,7 @@ Rationale: Codex guidance supports concise repo-level instructions, while suppor
 
 Date: 2026-06-05
 
-Status: Accepted
+Status: Superseded by 0008 and 0012
 
 Decision: Treat Next, Vue/Nuxt, Astro, SvelteKit, Cloudflare, Vercel, and similar options as candidates only.
 
@@ -71,3 +71,63 @@ Status: Accepted
 Decision: Future implementation should bias toward a static-first JavaScript architecture unless site requirements justify server behavior.
 
 Rationale: The user expects a personal website likely built with a static JavaScript builder and hosted on a conventional frontend provider.
+
+## 0008 - Use Next.js Static Export
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Use Next.js App Router as the recognizable app/build framework, configured with `output: "export"` for static HTML output.
+
+Rationale: The user wants an employer-recognizable framework and a simple static personal site without server behavior.
+
+## 0009 - Store Content In MDX Files
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Store homepage and project content in repo-backed MDX modules under `content/`, with project metadata exported from each project file.
+
+Rationale: The user wants file-backed content and is comfortable editing focused MDX files directly.
+
+## 0010 - Avoid CMS, Database, And Editor Frameworks
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Do not add a CMS framework, database, Vercel database, WYSIWYG library, or server-backed editing surface for this bootstrap.
+
+Rationale: The site is intentionally tiny, and the user explicitly wants custom UI and simple repo files rather than a content/admin framework.
+
+## 0011 - Use DialKit Only For Local Style Tuning
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Use DialKit only on a local-development `/playground` route for tuning CSS/design parameters.
+
+Rationale: DialKit is useful for quick style experiments, but the public site should remain a simple static export without a design-control UI.
+
+## 0012 - Deploy Through Cloudflare Pages
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Use Cloudflare Pages GitHub integration with build command `npm run build` and output directory `out`.
+
+Rationale: The user has a Cloudflare account, wants GitHub-managed code, and wants branch/PR preview builds.
+
+## 0013 - Keep The Bootstrap Visually Bare
+
+Date: 2026-06-05
+
+Status: Accepted
+
+Decision: Keep the current app bootstrap black-and-white and minimally styled until the user explicitly asks for design work.
+
+Rationale: The user wants a starter personal website scaffold first, not a visual design pass. Avoid decorative cards, gradients, shadows, oversized hero treatments, animation polish, Tailwind, shadcn, or UI-kit styling during bootstrap work.

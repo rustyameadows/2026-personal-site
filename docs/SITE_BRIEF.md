@@ -4,22 +4,25 @@ Last updated: 2026-06-05
 
 ## Working Summary
 
-This repo will become a new personal website. It will likely be built with a static or mostly static JavaScript site builder and hosted on a conventional frontend provider such as Cloudflare or Vercel.
+This repo is becoming a new personal website built with a static-exported Next.js app, repo-backed MDX content, and Cloudflare Pages deployment from GitHub.
 
-The exact framework, host, styling approach, content source, and site structure are deliberately undecided.
+The first version is intentionally small: a homepage, a project view, focused MDX files, and a local-only DialKit playground for later typography/style tuning.
+
+The current bootstrap is intentionally bare. It should stay black-and-white and lightly styled until the user explicitly asks for a design pass.
 
 ## Early Goals
 
 - Create a personal web presence that feels intentional, current, and maintainable.
 - Keep the site fast, responsive, accessible, and easy to iterate on with Codex.
 - Support a workflow where agents can understand current context from docs, keep a visible task list, use subagents when helpful, and verify browser-visible work in the Codex in-app browser.
-- Avoid premature technical choices before the content and experience direction are clearer.
+- Avoid adding CMS/database/editor machinery while the site is still small.
+- Avoid adding visual design machinery while the bootstrap is still being established.
 
 ## Early Non-Goals
 
-- Do not scaffold a framework before the user chooses or asks for one.
 - Do not add a CMS, database, auth, analytics, payments, email capture, or deployment provider by default.
 - Do not turn the first screen into a generic landing page placeholder.
+- Do not add Tailwind, shadcn, decorative cards, gradients, animation polish, or a finished visual system during bootstrap work.
 
 ## Product Questions
 
@@ -27,19 +30,19 @@ The exact framework, host, styling approach, content source, and site structure 
 - Which modes should the site support: work/portfolio, writing, experiments, personal notes, speaking, contact, resume, or something else?
 - What should feel unusually "you" about the site?
 - Which existing projects, writing, images, links, or artifacts should be included first?
-- Should the site be mostly static content, or does it need dynamic data later?
+- Which project MDX files should be written first?
 
 ## Design Principles
 
 - Make the actual site experience the first screen.
-- Use imagery, motion, typography, and interaction with restraint and purpose.
+- Defer imagery, motion, typography exploration, and interaction polish until a design pass is requested.
 - Prioritize readability, performance, responsive behavior, and semantic structure.
 - Keep visual decisions grounded in the site owner's work and personality.
 - Verify meaningful UI changes in the Codex in-app browser before calling them done.
 
 ## Technical Posture
 
-- Bias toward a static-first JavaScript builder unless requirements justify server behavior.
-- Keep deployment portable until a provider is selected.
+- Keep the Next.js app compatible with static export unless requirements justify server behavior.
+- Deploy through Cloudflare Pages from GitHub.
 - Prefer simple content formats and folder structures that future agents can inspect quickly.
 - Record durable technical decisions in `docs/DECISIONS.md`.

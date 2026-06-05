@@ -2,7 +2,9 @@
 
 This repository is the starting point for a new personal website.
 
-The site will likely become a static or mostly static JavaScript build and deploy to a conventional frontend host such as Cloudflare or Vercel. The exact framework, package manager, hosting target, content model, and visual direction are intentionally undecided.
+The site is a static-exported Next.js app with repo-backed MDX content and a local-only DialKit playground. It is intended to deploy from GitHub to Cloudflare Pages.
+
+This is a bare bootstrap, not a design pass. The app uses minimal black-and-white CSS only.
 
 ## Read First
 
@@ -17,10 +19,22 @@ The site will likely become a static or mostly static JavaScript build and deplo
 
 ## Current State
 
-The repo is docs-first. No app framework has been scaffolded yet.
+- Next.js App Router with `output: "export"`
+- MDX content under `content/`
+- Explicit project registry in `src/lib/content.ts`
+- Local-only `/playground` powered by DialKit
+- Minimal black-and-white styling; no Tailwind or UI kit
+- Cloudflare Pages target: build `npm run build`, publish `out`
 
 ## Commands
 
-No setup, dev, test, lint, or build commands exist yet.
+```sh
+npm install
+npm run dev
+npm run lint
+npm run typecheck
+npm run build
+npm run preview:static
+```
 
-When the framework is chosen, update this file and `AGENTS.md` with exact commands.
+`npm run preview:static` serves the exported `out/` directory at `http://localhost:4173` after a build.
