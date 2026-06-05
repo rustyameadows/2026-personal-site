@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { SiteHeader } from "@/components/SiteHeader";
 import { home } from "@/lib/content";
 
 import "./globals.css";
@@ -20,10 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <SiteHeader />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

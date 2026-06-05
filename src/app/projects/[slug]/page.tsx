@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getProjectBySlug, projects } from "@/lib/content";
@@ -28,8 +29,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: project.title,
-    description: project.summary
+    title: project.title
   };
 }
 
@@ -41,26 +41,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const Content = project.Content;
-
   return (
     <main className="project-page">
-      <section className="project-intro">
-        <p className="project-meta">
-          {project.year} / {project.role}
-        </p>
-        <h1>{project.title}</h1>
-        <p>{project.summary}</p>
-        <div className="project-tags" aria-label="Project tags">
-          {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
-      </section>
-
-      <article className="project-body mdx-content">
-        <Content />
-      </article>
+      <h1>{project.title}</h1>
+      <Link href="/">Return home</Link>
     </main>
   );
 }

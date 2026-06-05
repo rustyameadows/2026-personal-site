@@ -1,25 +1,17 @@
 import { ProjectCard } from "@/components/ProjectCard";
-import { featuredProjects, Home, home } from "@/lib/content";
+import { featuredProjects, home } from "@/lib/content";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="home-page">
       <section className="home-intro" aria-labelledby="home-title">
+        <p className="home-eyebrow">Hi, I&apos;m</p>
         <h1 id="home-title">{home.title}</h1>
         <p>{home.description}</p>
       </section>
 
-      <section>
-        <div className="mdx-content">
-          <Home />
-        </div>
-      </section>
-
-      <section className="project-section" aria-labelledby="featured-projects">
-        <div className="section-heading">
-          <h2 id="featured-projects">Projects</h2>
-          <p>Repo-backed project files rendered through one focused template.</p>
-        </div>
+      <section className="recent-work" aria-labelledby="recent-work-title">
+        <h2 id="recent-work-title">Recent work</h2>
         <div className="project-grid">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
