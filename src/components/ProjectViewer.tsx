@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -29,13 +30,18 @@ const sections = [
   { id: "end", label: "End" }
 ];
 
-const projectLoadBeats = {
-  done: 2300,
-  stage: 920,
-  title: 1650
-};
-
-type ProjectLoadPhase = "chrome" | "stage" | "title" | "done";
+const ProjectMotionTuner =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(
+        () =>
+          import("@/components/ProjectMotionTuner").then(
+            (module) => module.ProjectMotionTuner
+          ),
+        {
+          ssr: false
+        }
+      );
 
 function getPrefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -50,7 +56,6 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
   const [entryTransition, setEntryTransition] = useState<"load" | "switch">(
     "load"
   );
-  const [loadPhase, setLoadPhase] = useState<ProjectLoadPhase>("chrome");
   const [switchingProjectSlug, setSwitchingProjectSlug] = useState<
     string | null
   >(null);
@@ -92,30 +97,6 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     consumeRouteTransitionIntent();
     clearRouteTransitionClasses();
   }, [project.slug]);
-
-  useEffect(() => {
-    if (entryTransition !== "load") {
-      setLoadPhase("done");
-      return;
-    }
-
-    if (getPrefersReducedMotion()) {
-      setLoadPhase("done");
-      return;
-    }
-
-    setLoadPhase("chrome");
-
-    const timers = [
-      window.setTimeout(() => setLoadPhase("stage"), projectLoadBeats.stage),
-      window.setTimeout(() => setLoadPhase("title"), projectLoadBeats.title),
-      window.setTimeout(() => setLoadPhase("done"), projectLoadBeats.done)
-    ];
-
-    return () => {
-      timers.forEach((timer) => window.clearTimeout(timer));
-    };
-  }, [entryTransition, project.slug]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
@@ -201,7 +182,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
 
     window.setTimeout(
       () => router.push("/", { scroll: false }),
-      getRouteTransitionDelay()
+      getRouteTransitionDelay("project-to-home")
     );
   }
 
@@ -229,7 +210,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
 
     window.setTimeout(
       () => router.push(`/projects/${targetProject.slug}/`),
-      getRouteTransitionDelay()
+      getRouteTransitionDelay("project-to-project")
     );
   }
 
@@ -239,9 +220,6 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
         "project-view-page",
         entryTransition === "load"
           ? "project-view-page--load"
-          : undefined,
-        entryTransition === "load"
-          ? `project-view-page--load-${loadPhase}`
           : undefined,
         entryTransition === "switch"
           ? "project-view-page--switch"
@@ -381,6 +359,8 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
           );
         })}
       </nav>
+
+      {ProjectMotionTuner ? <ProjectMotionTuner /> : null}
     </main>
   );
 }

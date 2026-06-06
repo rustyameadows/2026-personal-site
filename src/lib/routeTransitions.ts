@@ -22,6 +22,39 @@ const rootClasses = [
 
 export const routeTransitionExitMs = 150;
 
+function parseDurationMs(value: string) {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return null;
+  }
+
+  if (trimmedValue.endsWith("ms")) {
+    return Number.parseFloat(trimmedValue);
+  }
+
+  if (trimmedValue.endsWith("s")) {
+    return Number.parseFloat(trimmedValue) * 1000;
+  }
+
+  return Number.parseFloat(trimmedValue);
+}
+
+function readCssDurationMs(variableName: string, fallback: number) {
+  if (typeof window === "undefined") {
+    return fallback;
+  }
+
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(variableName)
+    .trim();
+  const parsedValue = parseDurationMs(value);
+
+  return Number.isFinite(parsedValue) && parsedValue !== null
+    ? parsedValue
+    : fallback;
+}
+
 export function shouldHandleRouteTransitionClick(
   event: MouseEvent<HTMLAnchorElement>
 ) {
@@ -39,8 +72,19 @@ export function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function getRouteTransitionDelay() {
-  return prefersReducedMotion() ? 0 : routeTransitionExitMs;
+export function getRouteTransitionDelay(kind?: RouteTransitionKind) {
+  if (prefersReducedMotion()) {
+    return 0;
+  }
+
+  if (kind === "project-to-project") {
+    return readCssDurationMs(
+      "--motion-project-switch-exit-duration",
+      routeTransitionExitMs
+    );
+  }
+
+  return readCssDurationMs("--motion-route-exit", routeTransitionExitMs);
 }
 
 export function startRouteTransition(

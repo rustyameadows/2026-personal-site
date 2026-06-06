@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ProjectViewer } from "@/components/ProjectViewer";
 import { getProjectBySlug, projects } from "@/lib/content";
+import { getProjectMotionTuningInitScript } from "@/lib/projectMotionTuning";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -41,5 +42,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return <ProjectViewer project={project} projects={projects} />;
+  return (
+    <>
+      {process.env.NODE_ENV === "production" ? null : (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: getProjectMotionTuningInitScript()
+          }}
+        />
+      )}
+      <ProjectViewer project={project} projects={projects} />
+    </>
+  );
 }

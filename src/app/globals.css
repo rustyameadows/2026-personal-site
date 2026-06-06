@@ -7,10 +7,21 @@
   --motion-route-enter: 340ms;
   --motion-route-exit: 150ms;
   --motion-route-stagger: 48ms;
-  --motion-project-load-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-project-load-chrome: 900ms;
-  --motion-project-load-stage: 650ms;
-  --motion-project-load-title: 360ms;
+  --motion-project-load-chrome-duration: 900ms;
+  --motion-project-load-chrome-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-load-stage-duration: 650ms;
+  --motion-project-load-stage-delay: 920ms;
+  --motion-project-load-stage-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-load-title-duration: 360ms;
+  --motion-project-load-title-delay: 1650ms;
+  --motion-project-load-title-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-switch-exit-duration: 150ms;
+  --motion-project-switch-exit-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-switch-stage-duration: 180ms;
+  --motion-project-switch-stage-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-project-switch-title-duration: 170ms;
+  --motion-project-switch-title-delay: 90ms;
+  --motion-project-switch-title-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -346,18 +357,11 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-page--load .project-view-chrome {
+  animation: projectChromeAndPickerIn
+    var(--motion-project-load-chrome-duration)
+    var(--motion-project-load-chrome-ease)
+    both;
   opacity: 0;
-}
-
-.project-view-page--load-chrome .project-view-chrome {
-  animation: projectChromeAndPickerIn var(--motion-project-load-chrome)
-    var(--motion-project-load-ease) both;
-}
-
-.project-view-page--load-stage .project-view-chrome,
-.project-view-page--load-title .project-view-chrome,
-.project-view-page--load-done .project-view-chrome {
-  opacity: 1;
 }
 
 .project-view-shell {
@@ -383,22 +387,17 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-page--load .project-view-title {
+  animation: projectTitleLoadIn var(--motion-project-load-title-duration)
+    var(--motion-project-load-title-ease)
+    var(--motion-project-load-title-delay) both;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.965);
 }
 
-.project-view-page--load-title .project-view-title {
-  animation: projectTitleLoadIn var(--motion-project-load-title)
-    var(--motion-project-load-ease) both;
-}
-
-.project-view-page--load-done .project-view-title {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
 .project-view-page--switch .project-view-title {
-  animation: projectTitleSwitchIn 170ms var(--motion-route-ease) 90ms both;
+  animation: projectTitleSwitchIn var(--motion-project-switch-title-duration)
+    var(--motion-project-switch-title-ease)
+    var(--motion-project-switch-title-delay) both;
 }
 
 .project-view-stage {
@@ -409,24 +408,17 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-page--load .project-view-stage {
+  animation: projectStageLoadIn var(--motion-project-load-stage-duration)
+    var(--motion-project-load-stage-ease)
+    var(--motion-project-load-stage-delay) both;
   opacity: 0;
   transform: scale(0.975);
   transform-origin: center top;
 }
 
-.project-view-page--load-stage .project-view-stage {
-  animation: projectStageLoadIn var(--motion-project-load-stage)
-    var(--motion-project-load-ease) both;
-}
-
-.project-view-page--load-title .project-view-stage,
-.project-view-page--load-done .project-view-stage {
-  opacity: 1;
-  transform: scale(1);
-}
-
 .project-view-page--switch .project-view-stage {
-  animation: projectStageSwitchIn 180ms var(--motion-route-ease) both;
+  animation: projectStageSwitchIn var(--motion-project-switch-stage-duration)
+    var(--motion-project-switch-stage-ease) both;
 }
 
 .project-viewer {
@@ -580,18 +572,11 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-page--load .project-picker {
+  animation: projectChromeAndPickerIn
+    var(--motion-project-load-chrome-duration)
+    var(--motion-project-load-chrome-ease)
+    both;
   opacity: 0;
-}
-
-.project-view-page--load-chrome .project-picker {
-  animation: projectChromeAndPickerIn var(--motion-project-load-chrome)
-    var(--motion-project-load-ease) both;
-}
-
-.project-view-page--load-stage .project-picker,
-.project-view-page--load-title .project-picker,
-.project-view-page--load-done .project-picker {
-  opacity: 1;
 }
 
 .project-picker__item {
@@ -706,14 +691,14 @@ html.route-transitioning--project-to-home .project-picker {
 }
 
 html.route-transitioning--project-to-project .project-view-title {
-  animation: projectTitleSwitchOut var(--motion-route-exit)
-    var(--motion-route-ease-in) both;
+  animation: projectTitleSwitchOut var(--motion-project-switch-exit-duration)
+    var(--motion-project-switch-exit-ease) both;
   transform: translate(-50%, -50%);
 }
 
 html.route-transitioning--project-to-project .project-view-stage {
-  animation: projectStageSwitchOut var(--motion-route-exit)
-    var(--motion-route-ease-in) both;
+  animation: projectStageSwitchOut var(--motion-project-switch-exit-duration)
+    var(--motion-project-switch-exit-ease) both;
   transform: none;
 }
 
@@ -1044,6 +1029,21 @@ button {
   .project-view-page--switch .project-view-stage,
   .project-view-page--switch .project-view-title {
     animation: none;
+  }
+
+  .project-view-page--load .project-view-chrome,
+  .project-view-page--load .project-picker {
+    opacity: 1;
+  }
+
+  .project-view-page--load .project-view-stage {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .project-view-page--load .project-view-title {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   .project-viewer {
