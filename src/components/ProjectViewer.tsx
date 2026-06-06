@@ -3,7 +3,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import type { MouseEvent } from "react";
+import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
@@ -20,6 +20,10 @@ import {
 type ProjectViewerProps = {
   project: ProjectMeta;
   projects: ProjectMeta[];
+};
+
+type ProgressMarkerStyle = CSSProperties & {
+  "--project-progress-marker-index": number;
 };
 
 const sections = [
@@ -320,7 +324,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
 
             <nav className="project-progress" aria-label="Project sections">
               <span className="project-progress__track" aria-hidden="true" />
-              {sections.map((section) => (
+              {sections.map((section, sectionIndex) => (
                 <a
                   className="project-progress__marker"
                   href={`#${section.id}`}
@@ -330,6 +334,11 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
                   }
                   key={section.id}
                   onClick={(event) => handleRailClick(event, section.id)}
+                  style={
+                    {
+                      "--project-progress-marker-index": sectionIndex
+                    } as ProgressMarkerStyle
+                  }
                 >
                   {section.label}
                 </a>

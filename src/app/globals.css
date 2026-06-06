@@ -22,6 +22,8 @@
   --motion-project-switch-title-duration: 350ms;
   --motion-project-switch-title-delay: 110ms;
   --motion-project-switch-title-ease: cubic-bezier(0.26, 0.22, 0.31, 1.24);
+  --motion-project-progress-marker-duration: 90ms;
+  --motion-project-progress-marker-stagger: 120ms;
 }
 
 * {
@@ -437,9 +439,26 @@ html.route-transitioning--home-to-project .project-link {
   transform-origin: center top;
 }
 
-.project-view-page--switch .project-view-stage {
+.project-view-page--load .project-progress__marker {
+  animation: projectStageSwitchIn
+    var(--motion-project-progress-marker-duration)
+    var(--motion-project-switch-stage-ease) both;
+  animation-delay: calc(
+    var(--motion-project-load-stage-delay) + 90ms +
+      var(--project-progress-marker-delay)
+  );
+}
+
+.project-view-page--switch .project-viewer__scroll {
   animation: projectStageSwitchIn var(--motion-project-switch-stage-duration)
     var(--motion-project-switch-stage-ease) both;
+}
+
+.project-view-page--switch .project-progress__marker {
+  animation: projectStageSwitchIn
+    var(--motion-project-progress-marker-duration)
+    var(--motion-project-switch-stage-ease) both;
+  animation-delay: var(--project-progress-marker-delay);
 }
 
 .project-viewer {
@@ -580,6 +599,11 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-progress__marker {
+  --project-progress-marker-delay: calc(
+    var(--project-progress-marker-index) *
+      var(--motion-project-progress-marker-stagger)
+  );
+  --project-progress-marker-index: 0;
   background: white;
   border: 2px solid black;
   border-radius: 999px;
@@ -718,36 +742,27 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 html.route-transitioning--project-to-home .project-view-chrome {
+  animation: none;
   opacity: 0;
-  transform: scale(0.995);
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  transition: opacity var(--motion-route-exit) var(--motion-route-ease-in);
 }
 
 html.route-transitioning--project-to-home .project-view-title {
+  animation: none;
   opacity: 0;
-  transform: translate(-50%, -54%) scale(0.985);
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  transition: opacity var(--motion-route-exit) var(--motion-route-ease-in);
 }
 
 html.route-transitioning--project-to-home .project-view-stage {
+  animation: none;
   opacity: 0;
-  transform: scale(0.985);
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  transition: opacity var(--motion-route-exit) var(--motion-route-ease-in);
 }
 
 html.route-transitioning--project-to-home .project-picker {
+  animation: none;
   opacity: 0;
-  transform: scale(0.975);
-  transform-origin: center bottom;
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  transition: opacity var(--motion-route-exit) var(--motion-route-ease-in);
 }
 
 html.route-transitioning--project-to-project .project-view-title {
@@ -756,10 +771,10 @@ html.route-transitioning--project-to-project .project-view-title {
   transform: translate(-50%, -50%);
 }
 
-html.route-transitioning--project-to-project .project-view-stage {
+html.route-transitioning--project-to-project .project-viewer__scroll,
+html.route-transitioning--project-to-project .project-progress__marker {
   animation: projectStageSwitchOut var(--motion-project-switch-exit-duration)
     var(--motion-project-switch-exit-ease) both;
-  transform: none;
 }
 
 @keyframes homeLoadIntro {
@@ -1053,7 +1068,8 @@ button {
   html.route-transitioning--project-to-home .project-view-stage,
   html.route-transitioning--project-to-home .project-picker,
   html.route-transitioning--project-to-project .project-view-title,
-  html.route-transitioning--project-to-project .project-view-stage,
+  html.route-transitioning--project-to-project .project-viewer__scroll,
+  html.route-transitioning--project-to-project .project-progress__marker,
   .project-picker__item,
   .project-progress__marker,
   .project-stack__layer {
@@ -1068,7 +1084,8 @@ button {
   html.route-transitioning--project-to-home .project-view-stage,
   html.route-transitioning--project-to-home .project-picker,
   html.route-transitioning--project-to-project .project-view-title,
-  html.route-transitioning--project-to-project .project-view-stage {
+  html.route-transitioning--project-to-project .project-viewer__scroll,
+  html.route-transitioning--project-to-project .project-progress__marker {
     opacity: 1;
     transform: none;
   }
@@ -1078,13 +1095,15 @@ button {
   .home-page--from-project .home-intro,
   .home-page--from-project .recent-work h2,
   .home-page--from-project .project-link,
-  html.route-transitioning--project-to-project .project-view-stage,
+  html.route-transitioning--project-to-project .project-viewer__scroll,
+  html.route-transitioning--project-to-project .project-progress__marker,
   html.route-transitioning--project-to-project .project-view-title,
   .project-view-page--load .project-view-chrome,
   .project-view-page--load .project-view-stage,
   .project-view-page--load .project-view-title,
   .project-view-page--load .project-picker,
-  .project-view-page--switch .project-view-stage,
+  .project-view-page--switch .project-viewer__scroll,
+  .project-view-page--switch .project-progress__marker,
   .project-view-page--switch .project-view-title {
     animation: none;
   }
