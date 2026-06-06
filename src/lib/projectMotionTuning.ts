@@ -22,10 +22,12 @@ export type ProjectMotionTuningValues = {
   };
 };
 
-export const projectMotionTuningStorageKey = "project-motion-tuning-values-v4";
+export const projectMotionTuningStorageKey = "project-motion-tuning-values-v5";
+export const projectMotionTuningEnabledStorageKey =
+  "project-motion-tuning-enabled";
 
 const standardEase: ProjectMotionEase = [0.4, 0, 0.2, 1];
-const routeEaseOut: ProjectMotionEase = [0.22, 1, 0.36, 1];
+const titleEase: ProjectMotionEase = [0.26, 0.22, 0.31, 1.24];
 
 export const projectMotionTuningDefaults: ProjectMotionTuningValues = {
   fullLoad: {
@@ -34,17 +36,17 @@ export const projectMotionTuningDefaults: ProjectMotionTuningValues = {
       duration: 0.9,
       ease: standardEase
     },
-    stageStartDelay: 920,
+    stageStartDelay: 60,
     stage: {
       type: "easing",
       duration: 0.65,
       ease: standardEase
     },
-    titleStartDelay: 1650,
+    titleStartDelay: 180,
     title: {
       type: "easing",
       duration: 0.36,
-      ease: standardEase
+      ease: titleEase
     }
   },
   projectSwitch: {
@@ -55,14 +57,14 @@ export const projectMotionTuningDefaults: ProjectMotionTuningValues = {
     },
     stageIn: {
       type: "easing",
-      duration: 0.18,
-      ease: routeEaseOut
+      duration: 0.5,
+      ease: standardEase
     },
-    titleInDelay: 90,
+    titleInDelay: 110,
     titleIn: {
       type: "easing",
-      duration: 0.17,
-      ease: routeEaseOut
+      duration: 0.35,
+      ease: titleEase
     }
   }
 };
@@ -278,6 +280,8 @@ export function normalizeProjectMotionTuningValues(
 
 export function getProjectMotionTuningInitScript() {
   return `(function(){try{var storage=null;try{storage=window.localStorage||window.sessionStorage;}catch(storageError){try{storage=window.sessionStorage;}catch(sessionError){storage=null;}}if(!storage){return;}var stored=storage.getItem(${JSON.stringify(
+    projectMotionTuningEnabledStorageKey
+  )});if(stored==="false"){var existingStyle=document.getElementById("project-motion-tuning-vars");if(existingStyle){existingStyle.remove();}return;}stored=storage.getItem(${JSON.stringify(
     projectMotionTuningStorageKey
   )});if(!stored){return;}var values=JSON.parse(stored);var pairs=${JSON.stringify(
     projectMotionCssVariables

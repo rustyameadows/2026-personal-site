@@ -10,18 +10,18 @@
   --motion-project-load-chrome-duration: 900ms;
   --motion-project-load-chrome-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --motion-project-load-stage-duration: 650ms;
-  --motion-project-load-stage-delay: 920ms;
+  --motion-project-load-stage-delay: 60ms;
   --motion-project-load-stage-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --motion-project-load-title-duration: 360ms;
-  --motion-project-load-title-delay: 1650ms;
-  --motion-project-load-title-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-load-title-delay: 180ms;
+  --motion-project-load-title-ease: cubic-bezier(0.26, 0.22, 0.31, 1.24);
   --motion-project-switch-exit-duration: 150ms;
   --motion-project-switch-exit-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --motion-project-switch-stage-duration: 180ms;
-  --motion-project-switch-stage-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --motion-project-switch-title-duration: 170ms;
-  --motion-project-switch-title-delay: 90ms;
-  --motion-project-switch-title-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-project-switch-stage-duration: 500ms;
+  --motion-project-switch-stage-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-project-switch-title-duration: 350ms;
+  --motion-project-switch-title-delay: 110ms;
+  --motion-project-switch-title-ease: cubic-bezier(0.26, 0.22, 0.31, 1.24);
 }
 
 * {
@@ -577,6 +577,19 @@ html.route-transitioning--home-to-project .project-link {
     var(--motion-project-load-chrome-ease)
     both;
   opacity: 0;
+}
+
+.project-motion-toggle {
+  background: white;
+  border: 1px solid black;
+  bottom: 16px;
+  color: black;
+  cursor: pointer;
+  font: inherit;
+  padding: 6px 8px;
+  position: fixed;
+  right: 16px;
+  z-index: 2147483647;
 }
 
 .project-picker__item {

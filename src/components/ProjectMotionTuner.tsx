@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { DialRoot, useDialKit } from "dialkit";
 
 import {
   cubicBezierValue,
   normalizeProjectMotionTuningValues,
+  projectMotionTuningEnabledStorageKey,
   projectMotionTuningDefaults,
   projectMotionTuningStorageKey,
   type ProjectMotionTransition,
@@ -45,6 +46,10 @@ function writeTuningStyle(declarations: string[]) {
   style.textContent = `:root{${declarations.join(";")};}`;
 }
 
+function removeTuningStyle() {
+  document.getElementById("project-motion-tuning-vars")?.remove();
+}
+
 function getMotionStorage() {
   try {
     return window.localStorage || window.sessionStorage;
@@ -55,6 +60,22 @@ function getMotionStorage() {
       return null;
     }
   }
+}
+
+function readStoredEnabled() {
+  if (typeof window === "undefined") {
+    return true;
+  }
+
+  return getMotionStorage()?.getItem(projectMotionTuningEnabledStorageKey) !==
+    "false";
+}
+
+function persistEnabled(enabled: boolean) {
+  getMotionStorage()?.setItem(
+    projectMotionTuningEnabledStorageKey,
+    enabled ? "true" : "false"
+  );
 }
 
 function readStoredValues() {
@@ -129,7 +150,7 @@ function applyValues(values: ProjectMotionTuningValues) {
   ]);
 }
 
-export function ProjectMotionTuner() {
+function ProjectMotionDialKit() {
   const initialValues = useMemo(readStoredValues, []);
   const values = useDialKit("Project Motion Curves", {
     fullLoad: {
@@ -163,4 +184,37 @@ export function ProjectMotionTuner() {
   }
 
   return <DialRoot position="top-right" defaultOpen theme="light" />;
+}
+
+export function ProjectMotionTuner() {
+  const [enabled, setEnabled] = useState(readStoredEnabled);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") {
+      return;
+    }
+
+    persistEnabled(enabled);
+
+    if (!enabled) {
+      removeTuningStyle();
+    }
+  }, [enabled]);
+
+  if (process.env.NODE_ENV === "production") {
+    return null;
+  }
+
+  return (
+    <>
+      <button
+        className="project-motion-toggle"
+        type="button"
+        onClick={() => setEnabled((value) => !value)}
+      >
+        {enabled ? "Hide motion controls" : "Show motion controls"}
+      </button>
+      {enabled ? <ProjectMotionDialKit /> : null}
+    </>
+  );
 }
