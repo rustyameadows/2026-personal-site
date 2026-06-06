@@ -332,12 +332,12 @@ html.route-transitioning--home-to-project .project-link {
 .project-view-page {
   --project-content-max: 1400px;
   --project-mega-width: 1900px;
+  --project-nav-optical-adjust: 4px;
   --project-page-padding: clamp(20px, 3vw, 40px);
-  --project-page-row-gap: clamp(4px, 0.8vw, 8px);
+  --project-page-row-gap: clamp(20px, 2vw, 32px);
   --project-chrome-space: calc(
-    (var(--project-page-padding) + var(--project-page-row-gap)) / 2
+    var(--project-page-row-gap) - var(--project-nav-optical-adjust)
   );
-  --project-viewer-height: min(66vh, 760px);
   --project-viewer-padding-block-end: clamp(32px, 6vw, 80px);
   --project-viewer-padding-block-start: clamp(56px, 8vw, 112px);
   --project-viewer-padding-inline: clamp(20px, 5vw, 72px);
@@ -351,10 +351,13 @@ html.route-transitioning--home-to-project .project-link {
   display: grid;
   gap: var(--project-page-row-gap);
   grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100svh;
   margin: 0;
   max-width: none;
-  min-height: 100svh;
+  min-height: 0;
+  overflow: hidden;
   padding: var(--project-page-padding);
+  padding-bottom: var(--project-chrome-space);
   padding-top: var(--project-chrome-space);
 }
 
@@ -367,6 +370,8 @@ html.route-transitioning--home-to-project .project-link {
 .project-view-name,
 .project-view-home {
   color: black;
+  display: inline-block;
+  line-height: 1;
 }
 
 .project-view-page--load .project-view-chrome {
@@ -378,8 +383,11 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-shell {
-  margin: calc(var(--project-chrome-space) - var(--project-page-row-gap)) auto 0;
+  display: grid;
+  height: 100%;
+  margin: 0 auto;
   max-width: var(--project-mega-width);
+  min-height: 0;
   position: relative;
   width: 100%;
 }
@@ -390,12 +398,13 @@ html.route-transitioning--home-to-project .project-link {
   left: 50%;
   line-height: 0.9;
   margin: 0;
-  max-width: min(900px, 90vw);
+  max-width: 100%;
   pointer-events: none;
   position: absolute;
   text-align: center;
   top: 0;
   transform: translate(-50%, -50%);
+  width: max-content;
   z-index: 2;
 }
 
@@ -415,6 +424,8 @@ html.route-transitioning--home-to-project .project-link {
 
 .project-view-stage {
   display: block;
+  height: 100%;
+  min-height: 0;
 }
 
 .project-view-page--load .project-view-stage {
@@ -433,8 +444,9 @@ html.route-transitioning--home-to-project .project-link {
 
 .project-viewer {
   border: 2px solid black;
-  height: var(--project-viewer-height);
+  height: 100%;
   -ms-overflow-style: none;
+  min-height: 0;
   overflow-x: hidden;
   overflow-y: hidden;
   padding: 0;
@@ -935,7 +947,6 @@ button {
     --project-progress-inset-block: 18px;
     --project-progress-inset-inline: 18px;
     --project-progress-safe-area: 0px;
-    --project-viewer-height: 58vh;
     gap: 12px;
     padding: 20px;
   }
