@@ -1,12 +1,12 @@
 import HomeContent, { home as homeMeta } from "@content/home.mdx";
-import { project as project01 } from "@content/projects/project-01.mdx";
-import { project as project02 } from "@content/projects/project-02.mdx";
-import { project as project03 } from "@content/projects/project-03.mdx";
-import { project as project04 } from "@content/projects/project-04.mdx";
-import { project as project05 } from "@content/projects/project-05.mdx";
-import { project as project06 } from "@content/projects/project-06.mdx";
-import { project as project07 } from "@content/projects/project-07.mdx";
-import { project as project08 } from "@content/projects/project-08.mdx";
+import { project as downToShop } from "@content/projects/down-to-shop.mdx";
+import { project as iveSeenTheFuture } from "@content/projects/ive-seen-the-future.mdx";
+import { project as littlePlains } from "@content/projects/little-plains.mdx";
+import { project as nearlyImpossible } from "@content/projects/nearly-impossible.mdx";
+import { project as pineappleProductions } from "@content/projects/pineapple-productions.mdx";
+import { project as reveal } from "@content/projects/reveal.mdx";
+import { project as romanAndWilliamsGuild } from "@content/projects/roman-and-williams-guild.mdx";
+import { project as tattly } from "@content/projects/tattly.mdx";
 
 export type HomeMeta = {
   title: string;
@@ -23,14 +23,14 @@ export const home = homeMeta as HomeMeta;
 export const Home = HomeContent;
 
 export const projects: ProjectMeta[] = [
-  project01,
-  project02,
-  project03,
-  project04,
-  project05,
-  project06,
-  project07,
-  project08
+  pineappleProductions,
+  littlePlains,
+  iveSeenTheFuture,
+  reveal,
+  romanAndWilliamsGuild,
+  downToShop,
+  tattly,
+  nearlyImpossible
 ].map((project) => project as ProjectMeta);
 
 export const featuredProjects = projects.filter((project) => project.featured);
