@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
 import type { ProjectMeta } from "@/lib/content";
@@ -29,6 +29,14 @@ const sections = [
   { id: "end", label: "End" }
 ];
 
+const projectLoadBeats = {
+  done: 2300,
+  stage: 920,
+  title: 1650
+};
+
+type ProjectLoadPhase = "chrome" | "stage" | "title" | "done";
+
 function getPrefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -42,11 +50,12 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
   const [entryTransition, setEntryTransition] = useState<"load" | "switch">(
     "load"
   );
+  const [loadPhase, setLoadPhase] = useState<ProjectLoadPhase>("chrome");
   const [switchingProjectSlug, setSwitchingProjectSlug] = useState<
     string | null
   >(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const intent = readRouteTransitionIntent();
 
     if (!intent) {
@@ -83,6 +92,30 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     consumeRouteTransitionIntent();
     clearRouteTransitionClasses();
   }, [project.slug]);
+
+  useEffect(() => {
+    if (entryTransition !== "load") {
+      setLoadPhase("done");
+      return;
+    }
+
+    if (getPrefersReducedMotion()) {
+      setLoadPhase("done");
+      return;
+    }
+
+    setLoadPhase("chrome");
+
+    const timers = [
+      window.setTimeout(() => setLoadPhase("stage"), projectLoadBeats.stage),
+      window.setTimeout(() => setLoadPhase("title"), projectLoadBeats.title),
+      window.setTimeout(() => setLoadPhase("done"), projectLoadBeats.done)
+    ];
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [entryTransition, project.slug]);
 
   useEffect(() => {
     const viewer = viewerRef.current;
@@ -206,6 +239,9 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
         "project-view-page",
         entryTransition === "load"
           ? "project-view-page--load"
+          : undefined,
+        entryTransition === "load"
+          ? `project-view-page--load-${loadPhase}`
           : undefined,
         entryTransition === "switch"
           ? "project-view-page--switch"

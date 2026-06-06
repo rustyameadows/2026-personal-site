@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
-import { useState } from "react";
 
 import type { ProjectMeta } from "@/lib/content";
 import { ProjectStack } from "@/components/ProjectStack";
 import {
-  getRouteTransitionDelay,
   saveHomeScrollPosition,
   shouldHandleRouteTransitionClick,
   startRouteTransition
@@ -20,7 +18,6 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const router = useRouter();
-  const [isOpening, setIsOpening] = useState(false);
   const href = `/projects/${project.slug}/`;
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -29,21 +26,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
     }
 
     event.preventDefault();
-    setIsOpening(true);
     saveHomeScrollPosition();
     startRouteTransition({
       kind: "home-to-project",
       to: project.slug
     });
 
-    window.setTimeout(() => router.push(href), getRouteTransitionDelay());
+    router.push(href);
   }
 
   return (
     <Link
-      className={["project-link", isOpening ? "project-link--opening" : ""]
-        .filter(Boolean)
-        .join(" ")}
+      className="project-link"
       href={href}
       aria-label={`Open ${project.title}`}
       onClick={handleClick}
