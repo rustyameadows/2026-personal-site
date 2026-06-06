@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 import { ProjectCard } from "@/components/ProjectCard";
 import type { HomeMeta, ProjectMeta } from "@/lib/content";
 import {
   clearRouteTransitionClasses,
   consumeRouteTransitionIntent,
-  readRouteTransitionIntent
+  restoreHomeScrollPosition
 } from "@/lib/routeTransitions";
 
 type HomeViewProps = {
@@ -16,33 +16,24 @@ type HomeViewProps = {
 };
 
 export function HomeView({ home, projects }: HomeViewProps) {
-  const handledIntentRef = useRef<string | null>(null);
-  const [enteredFromProject, setEnteredFromProject] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
-  useEffect(() => {
-    const intent = readRouteTransitionIntent();
+  useLayoutEffect(() => {
+    const intent = consumeRouteTransitionIntent();
 
-    if (!intent) {
-      clearRouteTransitionClasses();
-      return;
+    if (intent?.kind === "project-to-home") {
+      restoreHomeScrollPosition();
     }
 
-    if (handledIntentRef.current === intent.id) {
-      clearRouteTransitionClasses();
-      return;
-    }
-
-    handledIntentRef.current = intent.id;
-    setEnteredFromProject(intent.kind === "project-to-home");
-    consumeRouteTransitionIntent();
     clearRouteTransitionClasses();
+    setHasLoaded(true);
   }, []);
 
   return (
     <main
       className={[
         "home-page",
-        enteredFromProject ? "home-page--from-project" : undefined
+        hasLoaded ? "home-page--loaded" : "home-page--loading"
       ]
         .filter(Boolean)
         .join(" ")}

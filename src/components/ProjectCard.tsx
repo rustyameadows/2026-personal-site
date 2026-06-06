@@ -9,6 +9,7 @@ import type { ProjectMeta } from "@/lib/content";
 import { ProjectStack } from "@/components/ProjectStack";
 import {
   getRouteTransitionDelay,
+  saveHomeScrollPosition,
   shouldHandleRouteTransitionClick,
   startRouteTransition
 } from "@/lib/routeTransitions";
@@ -29,6 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
     event.preventDefault();
     setIsOpening(true);
+    saveHomeScrollPosition();
     startRouteTransition({
       kind: "home-to-project",
       to: project.slug

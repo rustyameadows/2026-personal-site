@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { CSSProperties, MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
@@ -39,10 +39,9 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
   const handledIntentRef = useRef<string | null>(null);
   const renderedSlugRef = useRef<string | null>(null);
   const [activeSection, setActiveSection] = useState(sections[0].id);
-  const [entryTransition, setEntryTransition] = useState<
-    "none" | "from-home" | "from-project"
-  >("none");
-  const [transitionDirection, setTransitionDirection] = useState<1 | -1>(1);
+  const [entryTransition, setEntryTransition] = useState<"load" | "switch">(
+    "load"
+  );
   const [switchingProjectSlug, setSwitchingProjectSlug] = useState<
     string | null
   >(null);
@@ -52,7 +51,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
 
     if (!intent) {
       if (renderedSlugRef.current !== project.slug) {
-        setEntryTransition("none");
+        setEntryTransition("load");
         setSwitchingProjectSlug(null);
       }
 
@@ -70,15 +69,14 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     renderedSlugRef.current = project.slug;
 
     if (intent.kind === "home-to-project" && intent.to === project.slug) {
-      setEntryTransition("from-home");
+      setEntryTransition("load");
     } else if (
       intent.kind === "project-to-project" &&
       intent.to === project.slug
     ) {
-      setTransitionDirection(intent.direction ?? 1);
-      setEntryTransition("from-project");
+      setEntryTransition("switch");
     } else {
-      setEntryTransition("none");
+      setEntryTransition("load");
     }
 
     setSwitchingProjectSlug(null);
@@ -168,7 +166,10 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
       kind: "project-to-home"
     });
 
-    window.setTimeout(() => router.push("/"), getRouteTransitionDelay());
+    window.setTimeout(
+      () => router.push("/", { scroll: false }),
+      getRouteTransitionDelay()
+    );
   }
 
   function handleProjectClick(
@@ -186,15 +187,8 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
 
     event.preventDefault();
 
-    const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-    const targetIndex = projects.findIndex(
-      (item) => item.slug === targetProject.slug
-    );
-    const direction: 1 | -1 = targetIndex > currentIndex ? 1 : -1;
-
     setSwitchingProjectSlug(targetProject.slug);
     startRouteTransition({
-      direction,
       from: project.slug,
       kind: "project-to-project",
       to: targetProject.slug
@@ -210,20 +204,15 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     <main
       className={[
         "project-view-page",
-        entryTransition === "from-home"
-          ? "project-view-page--from-home"
+        entryTransition === "load"
+          ? "project-view-page--load"
           : undefined,
-        entryTransition === "from-project"
-          ? "project-view-page--from-project"
+        entryTransition === "switch"
+          ? "project-view-page--switch"
           : undefined
       ]
         .filter(Boolean)
         .join(" ")}
-      style={
-        {
-          "--project-entry-shift": `${transitionDirection * 18}px`
-        } as CSSProperties & Record<"--project-entry-shift", string>
-      }
     >
       <header className="project-view-chrome">
         <Link href="/" className="project-view-name" onClick={handleHomeClick}>

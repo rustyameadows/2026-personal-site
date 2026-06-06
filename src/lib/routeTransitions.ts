@@ -6,7 +6,6 @@ export type RouteTransitionKind =
   | "project-to-project";
 
 export type RouteTransitionIntent = {
-  direction?: 1 | -1;
   from?: string;
   id: string;
   kind: RouteTransitionKind;
@@ -14,6 +13,7 @@ export type RouteTransitionIntent = {
 };
 
 const intentKey = "project-route-transition-intent";
+const homeScrollKey = "project-home-scroll-position";
 const rootClasses = [
   "route-transitioning--home-to-project",
   "route-transitioning--project-to-home",
@@ -56,20 +56,6 @@ export function startRouteTransition(
   window.sessionStorage.setItem(intentKey, JSON.stringify(nextIntent));
   root.classList.add(`route-transitioning--${intent.kind}`);
 
-  if (intent.direction) {
-    root.style.setProperty(
-      "--route-project-entry-shift",
-      `${intent.direction * 18}px`
-    );
-    root.style.setProperty(
-      "--route-project-exit-shift",
-      `${intent.direction * -18}px`
-    );
-  } else {
-    root.style.removeProperty("--route-project-entry-shift");
-    root.style.removeProperty("--route-project-exit-shift");
-  }
-
   return nextIntent;
 }
 
@@ -98,4 +84,34 @@ export function consumeRouteTransitionIntent() {
 
 export function clearRouteTransitionClasses() {
   document.documentElement.classList.remove(...rootClasses);
+}
+
+export function saveHomeScrollPosition() {
+  window.sessionStorage.setItem(
+    homeScrollKey,
+    JSON.stringify({
+      x: window.scrollX,
+      y: window.scrollY
+    })
+  );
+}
+
+export function restoreHomeScrollPosition() {
+  const stored = window.sessionStorage.getItem(homeScrollKey);
+
+  if (!stored) {
+    return false;
+  }
+
+  try {
+    const position = JSON.parse(stored) as { x?: unknown; y?: unknown };
+    const x = typeof position.x === "number" ? position.x : 0;
+    const y = typeof position.y === "number" ? position.y : 0;
+
+    window.scrollTo(x, y);
+    return true;
+  } catch {
+    window.sessionStorage.removeItem(homeScrollKey);
+    return false;
+  }
 }

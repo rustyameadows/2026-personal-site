@@ -72,6 +72,20 @@ ul {
   padding-top: clamp(72px, 12vw, 160px);
 }
 
+.home-page--loading .home-intro,
+.home-page--loading .recent-work {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.home-page--loaded .home-intro {
+  animation: homeLoadIntro 520ms var(--motion-route-ease) 40ms both;
+}
+
+.home-page--loaded .recent-work {
+  animation: homeLoadRecentWork 460ms var(--motion-route-ease) 230ms both;
+}
+
 .home-intro {
   margin: 0 auto clamp(72px, 12vw, 140px);
   text-align: center;
@@ -352,9 +366,8 @@ html.route-transitioning--home-to-project
   color: black;
 }
 
-.project-view-page--from-home .project-view-chrome {
-  animation: projectChromeIn var(--motion-route-enter) var(--motion-route-ease)
-    both;
+.project-view-page--load .project-view-chrome {
+  animation: projectChromeAndPickerIn 180ms var(--motion-route-ease) both;
 }
 
 .project-view-shell {
@@ -379,14 +392,12 @@ html.route-transitioning--home-to-project
   z-index: 2;
 }
 
-.project-view-page--from-home .project-view-title {
-  animation: projectTitleFromHome var(--motion-route-enter)
-    var(--motion-route-ease) both;
+.project-view-page--load .project-view-title {
+  animation: projectTitleLoadIn 190ms var(--motion-route-ease) 170ms both;
 }
 
-.project-view-page--from-project .project-view-title {
-  animation: projectTitleFromProject var(--motion-route-enter)
-    var(--motion-route-ease) both;
+.project-view-page--switch .project-view-title {
+  animation: projectTitleSwitchIn 170ms var(--motion-route-ease) 90ms both;
 }
 
 .project-view-stage {
@@ -396,15 +407,13 @@ html.route-transitioning--home-to-project
   grid-template-columns: minmax(0, 1fr) 42px;
 }
 
-.project-view-page--from-home .project-view-stage {
-  animation: projectStageFromHome var(--motion-route-enter)
-    var(--motion-route-ease) both;
+.project-view-page--load .project-view-stage {
+  animation: projectStageLoadIn 220ms var(--motion-route-ease) 85ms both;
   transform-origin: center top;
 }
 
-.project-view-page--from-project .project-view-stage {
-  animation: projectStageFromProject var(--motion-route-enter)
-    var(--motion-route-ease) both;
+.project-view-page--switch .project-view-stage {
+  animation: projectStageSwitchIn 180ms var(--motion-route-ease) both;
 }
 
 .project-viewer {
@@ -545,15 +554,6 @@ html.route-transitioning--home-to-project
   outline-offset: 4px;
 }
 
-.project-view-page--from-home .project-progress {
-  animation: projectRailIn var(--motion-route-enter) var(--motion-route-ease)
-    var(--motion-route-stagger) both;
-}
-
-.project-view-page--from-project .project-progress {
-  animation: projectRailIn 260ms var(--motion-route-ease) both;
-}
-
 .project-picker {
   align-items: end;
   align-self: stretch;
@@ -566,13 +566,8 @@ html.route-transitioning--home-to-project
   padding: 4px 0 8px;
 }
 
-.project-view-page--from-home .project-picker {
-  animation: projectPickerIn var(--motion-route-enter) var(--motion-route-ease)
-    var(--motion-route-stagger) both;
-}
-
-.project-view-page--from-project .project-picker {
-  animation: projectPickerSwitchIn 260ms var(--motion-route-ease) both;
+.project-view-page--load .project-picker {
+  animation: projectChromeAndPickerIn 180ms var(--motion-route-ease) both;
 }
 
 .project-picker__item {
@@ -686,28 +681,39 @@ html.route-transitioning--project-to-home .project-picker {
 }
 
 html.route-transitioning--project-to-project .project-view-title {
-  opacity: 0;
-  transform: translate(
-      calc(-50% + var(--route-project-exit-shift, -18px)),
-      -50%
-    )
-    scale(0.99);
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  animation: projectTitleSwitchOut var(--motion-route-exit)
+    var(--motion-route-ease-in) both;
+  transform: translate(-50%, -50%);
 }
 
 html.route-transitioning--project-to-project .project-view-stage {
-  opacity: 0;
-  transform: translateX(var(--route-project-exit-shift, -18px)) scale(0.996);
-  transition:
-    opacity var(--motion-route-exit) var(--motion-route-ease-in),
-    transform var(--motion-route-exit) var(--motion-route-ease-in);
+  animation: projectStageSwitchOut var(--motion-route-exit)
+    var(--motion-route-ease-in) both;
+  transform: none;
 }
 
-html.route-transitioning--project-to-project .project-progress {
-  opacity: 0.35;
-  transition: opacity var(--motion-route-exit) var(--motion-route-ease-in);
+@keyframes homeLoadIntro {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homeLoadRecentWork {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes homeIntroFromProject {
@@ -734,10 +740,20 @@ html.route-transitioning--project-to-project .project-progress {
   }
 }
 
-@keyframes projectChromeIn {
+@keyframes projectChromeAndPickerIn {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes projectStageLoadIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
   }
 
   to {
@@ -746,89 +762,59 @@ html.route-transitioning--project-to-project .project-progress {
   }
 }
 
-@keyframes projectTitleFromHome {
+@keyframes projectTitleLoadIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -46%) scale(0.98);
+    transform: translate(-50%, -48%);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
   }
 }
 
-@keyframes projectTitleFromProject {
+@keyframes projectStageSwitchIn {
   from {
     opacity: 0;
-    transform: translate(
-        calc(-50% + var(--project-entry-shift, 18px)),
-        -50%
-      )
-      scale(0.99);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
   }
 }
 
-@keyframes projectStageFromHome {
+@keyframes projectStageSwitchOut {
   from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.994);
+    opacity: 1;
   }
 
   to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    opacity: 0;
   }
 }
 
-@keyframes projectStageFromProject {
+@keyframes projectTitleSwitchIn {
   from {
     opacity: 0;
-    transform: translateX(var(--project-entry-shift, 18px)) scale(0.996);
+    transform: translate(-50%, -50%);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translate(-50%, -50%);
   }
 }
 
-@keyframes projectRailIn {
+@keyframes projectTitleSwitchOut {
   from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  to {
     opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes projectPickerIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes projectPickerSwitchIn {
-  from {
-    opacity: 0.76;
-  }
-
-  to {
-    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -995,6 +981,12 @@ button {
   html.route-transitioning--home-to-project
     .project-link:not(.project-link--opening),
   .project-link,
+  html.route-transitioning--project-to-home .project-view-chrome,
+  html.route-transitioning--project-to-home .project-view-title,
+  html.route-transitioning--project-to-home .project-view-stage,
+  html.route-transitioning--project-to-home .project-picker,
+  html.route-transitioning--project-to-project .project-view-title,
+  html.route-transitioning--project-to-project .project-view-stage,
   .project-picker__item,
   .project-progress__marker,
   .project-stack__layer {
@@ -1004,6 +996,8 @@ button {
   .project-link--opening,
   html.route-transitioning--home-to-project
     .project-link:not(.project-link--opening),
+  .home-page--loading .home-intro,
+  .home-page--loading .recent-work,
   html.route-transitioning--project-to-home .project-view-chrome,
   html.route-transitioning--project-to-home .project-view-title,
   html.route-transitioning--project-to-home .project-view-stage,
@@ -1014,18 +1008,19 @@ button {
     transform: none;
   }
 
+  .home-page--loaded .home-intro,
+  .home-page--loaded .recent-work,
   .home-page--from-project .home-intro,
   .home-page--from-project .recent-work h2,
   .home-page--from-project .project-link,
-  .project-view-page--from-home .project-view-chrome,
-  .project-view-page--from-home .project-view-stage,
-  .project-view-page--from-home .project-view-title,
-  .project-view-page--from-home .project-progress,
-  .project-view-page--from-home .project-picker,
-  .project-view-page--from-project .project-view-stage,
-  .project-view-page--from-project .project-view-title,
-  .project-view-page--from-project .project-progress,
-  .project-view-page--from-project .project-picker {
+  html.route-transitioning--project-to-project .project-view-stage,
+  html.route-transitioning--project-to-project .project-view-title,
+  .project-view-page--load .project-view-chrome,
+  .project-view-page--load .project-view-stage,
+  .project-view-page--load .project-view-title,
+  .project-view-page--load .project-picker,
+  .project-view-page--switch .project-view-stage,
+  .project-view-page--switch .project-view-title {
     animation: none;
   }
 
