@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 
 import { home } from "@/lib/content";
+import { getProjectMotionTuningInitScript } from "@/lib/projectMotionTuning";
 
 import "./globals.css";
 
@@ -19,6 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {process.env.NODE_ENV === "production" ? null : (
+          <Script
+            dangerouslySetInnerHTML={{
+              __html: getProjectMotionTuningInitScript()
+            }}
+            id="project-motion-tuning-init"
+            strategy="beforeInteractive"
+          />
+        )}
+      </head>
       <body>{children}</body>
     </html>
   );
