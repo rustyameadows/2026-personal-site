@@ -243,92 +243,99 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
         </h1>
 
         <div className="project-view-stage">
-          <div
-            className="project-viewer"
-            ref={viewerRef}
-            tabIndex={0}
-            aria-label={`${project.title} project content`}
-          >
-            <section
-              className="project-view-section project-view-section--intro"
-              data-view-section="intro"
-              id="intro"
+          <div className="project-viewer">
+            <div
+              className="project-viewer__scroll"
+              ref={viewerRef}
+              tabIndex={0}
+              aria-label={`${project.title} project content`}
             >
-              <div className="project-placeholder project-placeholder--wide" />
-              <div>
-                <p>
-                  Placeholder project opening copy for testing the viewer
-                  layout and internal scroll behavior.
-                </p>
-                <p>
-                  This area will eventually hold real project narrative,
-                  imagery, and supporting details.
-                </p>
+              <div className="project-viewer__content">
+                <section
+                  className="project-view-section project-view-section--intro"
+                  data-view-section="intro"
+                  id="intro"
+                >
+                  <div className="project-placeholder project-placeholder--wide" />
+                  <div>
+                    <p>
+                      Placeholder project opening copy for testing the viewer
+                      layout and internal scroll behavior.
+                    </p>
+                    <p>
+                      This area will eventually hold real project narrative,
+                      imagery, and supporting details.
+                    </p>
+                  </div>
+                </section>
+
+                <section
+                  className="project-view-section"
+                  data-view-section="image"
+                  id="image"
+                >
+                  <div className="project-placeholder project-placeholder--hero" />
+                </section>
+
+                <section
+                  className="project-view-section project-view-section--split"
+                  data-view-section="detail"
+                  id="detail"
+                >
+                  <div className="project-placeholder project-placeholder--tall" />
+                  <div>
+                    <p>
+                      Placeholder detail copy sits beside a taller block so this
+                      pass can prove the project viewer handles mixed content.
+                    </p>
+                    <p>
+                      The final page can swap these blocks for real assets
+                      without changing the route flow.
+                    </p>
+                  </div>
+                </section>
+
+                <section
+                  className="project-view-section"
+                  data-view-section="notes"
+                  id="notes"
+                >
+                  <p>
+                    Notes placeholder. The rail should mark this section as
+                    active when the scroll position reaches this part of the
+                    viewer.
+                  </p>
+                  <div className="project-placeholder project-placeholder--short" />
+                </section>
+
+                <section
+                  className="project-view-section project-view-section--end"
+                  data-view-section="end"
+                  id="end"
+                >
+                  <p>End placeholder.</p>
+                </section>
               </div>
-            </section>
+            </div>
 
-            <section
-              className="project-view-section"
-              data-view-section="image"
-              id="image"
-            >
-              <div className="project-placeholder project-placeholder--hero" />
-            </section>
-
-            <section
-              className="project-view-section project-view-section--split"
-              data-view-section="detail"
-              id="detail"
-            >
-              <div className="project-placeholder project-placeholder--tall" />
-              <div>
-                <p>
-                  Placeholder detail copy sits beside a taller block so this
-                  pass can prove the project viewer handles mixed content.
-                </p>
-                <p>
-                  The final page can swap these blocks for real assets without
-                  changing the route flow.
-                </p>
-              </div>
-            </section>
-
-            <section
-              className="project-view-section"
-              data-view-section="notes"
-              id="notes"
-            >
-              <p>
-                Notes placeholder. The rail should mark this section as active
-                when the scroll position reaches this part of the viewer.
-              </p>
-              <div className="project-placeholder project-placeholder--short" />
-            </section>
-
-            <section
-              className="project-view-section project-view-section--end"
-              data-view-section="end"
-              id="end"
-            >
-              <p>End placeholder.</p>
-            </section>
+            <nav className="project-progress" aria-label="Project sections">
+              <span className="project-progress__track" aria-hidden="true" />
+              {sections.map((section) => (
+                <a
+                  className="project-progress__marker"
+                  href={`#${section.id}`}
+                  aria-label={section.label}
+                  aria-current={
+                    activeSection === section.id ? "true" : undefined
+                  }
+                  key={section.id}
+                  onClick={(event) => handleRailClick(event, section.id)}
+                >
+                  {section.label}
+                </a>
+              ))}
+            </nav>
           </div>
-
-          <nav className="project-progress" aria-label="Project sections">
-            <span className="project-progress__track" aria-hidden="true" />
-            {sections.map((section) => (
-              <a
-                className="project-progress__marker"
-                href={`#${section.id}`}
-                aria-label={section.label}
-                aria-current={activeSection === section.id ? "true" : undefined}
-                key={section.id}
-                onClick={(event) => handleRailClick(event, section.id)}
-              >
-                {section.label}
-              </a>
-            ))}
-          </nav>
         </div>
       </section>
 

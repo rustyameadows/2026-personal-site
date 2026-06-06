@@ -330,10 +330,23 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-page {
+  --project-content-max: 1400px;
+  --project-mega-width: 1900px;
   --project-page-padding: clamp(20px, 3vw, 40px);
   --project-page-row-gap: clamp(4px, 0.8vw, 8px);
   --project-chrome-space: calc(
     (var(--project-page-padding) + var(--project-page-row-gap)) / 2
+  );
+  --project-viewer-height: min(66vh, 760px);
+  --project-viewer-padding-block-end: clamp(32px, 6vw, 80px);
+  --project-viewer-padding-block-start: clamp(56px, 8vw, 112px);
+  --project-viewer-padding-inline: clamp(20px, 5vw, 72px);
+  --project-viewer-rail-width: 42px;
+  --project-progress-inset-block: clamp(32px, 5vw, 64px);
+  --project-progress-inset-inline: clamp(24px, 3vw, 48px);
+  --project-progress-safe-area: calc(
+    var(--project-viewer-rail-width) +
+      (var(--project-progress-inset-inline) * 2)
   );
   display: grid;
   gap: var(--project-page-row-gap);
@@ -366,7 +379,7 @@ html.route-transitioning--home-to-project .project-link {
 
 .project-view-shell {
   margin: calc(var(--project-chrome-space) - var(--project-page-row-gap)) auto 0;
-  max-width: 1380px;
+  max-width: var(--project-mega-width);
   position: relative;
   width: 100%;
 }
@@ -401,10 +414,7 @@ html.route-transitioning--home-to-project .project-link {
 }
 
 .project-view-stage {
-  align-items: stretch;
-  display: grid;
-  gap: clamp(16px, 2vw, 28px);
-  grid-template-columns: minmax(0, 1fr) 42px;
+  display: block;
 }
 
 .project-view-page--load .project-view-stage {
@@ -423,22 +433,41 @@ html.route-transitioning--home-to-project .project-link {
 
 .project-viewer {
   border: 2px solid black;
-  max-height: min(66vh, 760px);
-  min-height: min(66vh, 760px);
+  height: var(--project-viewer-height);
+  -ms-overflow-style: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.project-viewer__scroll {
+  height: 100%;
   -ms-overflow-style: none;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: clamp(56px, 8vw, 112px) clamp(20px, 5vw, 72px)
-    clamp(32px, 6vw, 80px);
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
 
-.project-viewer::-webkit-scrollbar {
+.project-viewer__content {
+  margin: 0 auto;
+  max-width: min(
+    var(--project-content-max),
+    calc(100% - var(--project-progress-safe-area))
+  );
+  min-width: 0;
+  padding: var(--project-viewer-padding-block-start)
+    var(--project-viewer-padding-inline)
+    var(--project-viewer-padding-block-end);
+  width: 100%;
+}
+
+.project-viewer__scroll::-webkit-scrollbar {
   display: none;
 }
 
-.project-viewer:focus-visible {
+.project-viewer__scroll:focus-visible {
   outline: 2px solid black;
   outline-offset: 6px;
 }
@@ -514,12 +543,18 @@ html.route-transitioning--home-to-project .project-link {
 
 .project-progress {
   align-items: center;
+  bottom: var(--project-progress-inset-block);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
-  padding: 6px 0;
-  position: relative;
+  min-height: 0;
+  padding: 0;
+  position: absolute;
+  right: var(--project-progress-inset-inline);
+  top: var(--project-progress-inset-block);
+  width: var(--project-viewer-rail-width);
+  z-index: 3;
 }
 
 .project-progress__track {
@@ -897,6 +932,10 @@ button {
 
 @media (max-width: 860px) {
   .project-view-page {
+    --project-progress-inset-block: 18px;
+    --project-progress-inset-inline: 18px;
+    --project-progress-safe-area: 0px;
+    --project-viewer-height: 58vh;
     gap: 12px;
     padding: 20px;
   }
@@ -909,24 +948,20 @@ button {
     font-size: clamp(3rem, 16vw, 5.5rem);
   }
 
-  .project-view-stage {
-    grid-template-columns: 1fr;
-  }
-
-  .project-viewer {
-    max-height: 58vh;
-    min-height: 58vh;
-  }
-
   .project-view-section--intro,
   .project-view-section--split {
     grid-template-columns: 1fr;
   }
 
   .project-progress {
+    bottom: auto;
     flex-direction: row;
     height: 36px;
+    left: var(--project-progress-inset-inline);
     padding: 0 8px;
+    right: var(--project-progress-inset-inline);
+    top: var(--project-progress-inset-block);
+    width: auto;
   }
 
   .project-progress__track {
@@ -973,15 +1008,14 @@ button {
   }
 
   .project-view-page {
+    --project-viewer-padding-block-end: 32px;
+    --project-viewer-padding-block-start: 52px;
+    --project-viewer-padding-inline: 16px;
     padding: 16px;
   }
 
   .project-view-shell {
     margin-top: 24px;
-  }
-
-  .project-viewer {
-    padding: 52px 16px 32px;
   }
 
   .project-placeholder--hero {
