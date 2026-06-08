@@ -7,7 +7,7 @@ import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
-import type { ProjectMeta } from "@/lib/content";
+import type { ProjectMeta, ProjectSection } from "@/lib/content";
 import {
   clearRouteTransitionClasses,
   consumeRouteTransitionIntent,
@@ -26,13 +26,15 @@ type ProgressMarkerStyle = CSSProperties & {
   "--project-progress-marker-index": number;
 };
 
-const sections = [
+const defaultProjectSections: ProjectSection[] = [
   { id: "intro", label: "Intro" },
   { id: "image", label: "Image" },
   { id: "detail", label: "Detail" },
   { id: "notes", label: "Notes" },
   { id: "end", label: "End" }
 ];
+
+const placeholderLayouts = ["intro", "image", "detail", "notes"] as const;
 
 const ProjectMotionTuner =
   process.env.NODE_ENV === "production"
@@ -51,12 +53,119 @@ function getPrefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+function getPlaceholderLayout(section: ProjectSection, sectionIndex: number) {
+  if (section.id === "end") {
+    return "end";
+  }
+
+  return placeholderLayouts[sectionIndex % placeholderLayouts.length];
+}
+
+function ProjectPlaceholderSection({
+  section,
+  sectionIndex
+}: {
+  section: ProjectSection;
+  sectionIndex: number;
+}) {
+  const layout = getPlaceholderLayout(section, sectionIndex);
+  const sectionNumber = String(sectionIndex + 1).padStart(2, "0");
+
+  if (layout === "end") {
+    return (
+      <section
+        className="project-view-section project-view-section--end"
+        data-view-section={section.id}
+        id={section.id}
+      >
+        <p>{section.label} placeholder.</p>
+      </section>
+    );
+  }
+
+  if (layout === "image") {
+    return (
+      <section
+        className="project-view-section"
+        data-view-section={section.id}
+        id={section.id}
+      >
+        <div className="project-placeholder project-placeholder--hero" />
+      </section>
+    );
+  }
+
+  if (layout === "detail") {
+    return (
+      <section
+        className="project-view-section project-view-section--split"
+        data-view-section={section.id}
+        id={section.id}
+      >
+        <div className="project-placeholder project-placeholder--tall" />
+        <div>
+          <p>
+            {section.label} placeholder content for testing this project viewer
+            section.
+          </p>
+          <p>
+            This block can become real project copy and assets without changing
+            the section rail.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  if (layout === "notes") {
+    return (
+      <section
+        className="project-view-section"
+        data-view-section={section.id}
+        id={section.id}
+      >
+        <p>
+          {section.label} placeholder. The progress rail should mark this
+          section as active when this content is closest to the top.
+        </p>
+        <div className="project-placeholder project-placeholder--short" />
+      </section>
+    );
+  }
+
+  return (
+    <section
+      className="project-view-section project-view-section--intro"
+      data-view-section={section.id}
+      id={section.id}
+    >
+      <div className="project-placeholder project-placeholder--wide" />
+      <div>
+        <p>
+          {section.label} placeholder section {sectionNumber} for testing the
+          viewer layout and internal scroll behavior.
+        </p>
+        <p>
+          This area will eventually hold real project narrative, imagery, and
+          supporting details.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 export function ProjectViewer({ project, projects }: ProjectViewerProps) {
   const router = useRouter();
   const viewerRef = useRef<HTMLDivElement>(null);
   const handledIntentRef = useRef<string | null>(null);
   const renderedSlugRef = useRef<string | null>(null);
-  const [activeSection, setActiveSection] = useState(sections[0].id);
+  const projectSections =
+    project.sections && project.sections.length > 0
+      ? project.sections
+      : defaultProjectSections;
+  const firstSectionId =
+    projectSections[0]?.id ?? defaultProjectSections[0].id;
+  const [activeSection, setActiveSection] = useState(firstSectionId);
   const [entryTransition, setEntryTransition] = useState<"load" | "switch">(
     "load"
   );
@@ -114,7 +223,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
         return;
       }
 
-      const nextSection = sections.reduce(
+      const nextSection = projectSections.reduce(
         (closest, section) => {
           const element = viewer.querySelector<HTMLElement>(
             `[data-view-section="${section.id}"]`
@@ -137,7 +246,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
         },
         {
           distance: Number.POSITIVE_INFINITY,
-          id: sections[0].id
+          id: firstSectionId
         }
       );
 
@@ -150,7 +259,7 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
     return () => {
       viewer.removeEventListener("scroll", updateActiveSection);
     };
-  }, [project.slug]);
+  }, [firstSectionId, project.slug, projectSections]);
 
   function handleRailClick(
     event: MouseEvent<HTMLAnchorElement>,
@@ -255,76 +364,19 @@ export function ProjectViewer({ project, projects }: ProjectViewerProps) {
               aria-label={`${project.title} project content`}
             >
               <div className="project-viewer__content">
-                <section
-                  className="project-view-section project-view-section--intro"
-                  data-view-section="intro"
-                  id="intro"
-                >
-                  <div className="project-placeholder project-placeholder--wide" />
-                  <div>
-                    <p>
-                      Placeholder project opening copy for testing the viewer
-                      layout and internal scroll behavior.
-                    </p>
-                    <p>
-                      This area will eventually hold real project narrative,
-                      imagery, and supporting details.
-                    </p>
-                  </div>
-                </section>
-
-                <section
-                  className="project-view-section"
-                  data-view-section="image"
-                  id="image"
-                >
-                  <div className="project-placeholder project-placeholder--hero" />
-                </section>
-
-                <section
-                  className="project-view-section project-view-section--split"
-                  data-view-section="detail"
-                  id="detail"
-                >
-                  <div className="project-placeholder project-placeholder--tall" />
-                  <div>
-                    <p>
-                      Placeholder detail copy sits beside a taller block so this
-                      pass can prove the project viewer handles mixed content.
-                    </p>
-                    <p>
-                      The final page can swap these blocks for real assets
-                      without changing the route flow.
-                    </p>
-                  </div>
-                </section>
-
-                <section
-                  className="project-view-section"
-                  data-view-section="notes"
-                  id="notes"
-                >
-                  <p>
-                    Notes placeholder. The rail should mark this section as
-                    active when the scroll position reaches this part of the
-                    viewer.
-                  </p>
-                  <div className="project-placeholder project-placeholder--short" />
-                </section>
-
-                <section
-                  className="project-view-section project-view-section--end"
-                  data-view-section="end"
-                  id="end"
-                >
-                  <p>End placeholder.</p>
-                </section>
+                {projectSections.map((section, sectionIndex) => (
+                  <ProjectPlaceholderSection
+                    key={section.id}
+                    section={section}
+                    sectionIndex={sectionIndex}
+                  />
+                ))}
               </div>
             </div>
 
             <nav className="project-progress" aria-label="Project sections">
               <span className="project-progress__track" aria-hidden="true" />
-              {sections.map((section, sectionIndex) => (
+              {projectSections.map((section, sectionIndex) => (
                 <a
                   className="project-progress__marker"
                   href={`#${section.id}`}

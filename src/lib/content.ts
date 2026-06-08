@@ -13,10 +13,16 @@ export type HomeMeta = {
   description: string;
 };
 
+export type ProjectSection = {
+  id: string;
+  label: string;
+};
+
 export type ProjectMeta = {
   slug: string;
   title: string;
   featured: boolean;
+  sections?: ProjectSection[];
 };
 
 export const home = homeMeta as HomeMeta;
