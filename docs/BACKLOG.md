@@ -22,10 +22,13 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [ ] Decide what content must exist for the first public version.
 - [x] Decide whether content should live in Markdown/MDX, a CMS, local data files, or another source.
 - [ ] Replace starter homepage copy with real copy.
-- [ ] Replace starter project with real project content.
+- [x] Replace starter project pages with real project content.
 - [x] Add representative hero assets and sourced introductions for the current project landers.
-- [ ] Replace the remaining project-page placeholder sections with real case-study content.
-- [ ] Replace the Explore Art and Orbs in-progress copy with real experiment content.
+- [x] Replace the remaining project-page placeholder prose with real case-study content.
+- [x] Publish complete Explore Art and **Creating Visuals with Agents** experiment content; retain Orbs as an entry in the latter.
+- [ ] Replace all gray case-study media placements with the separate sanitized, rights-aware real-asset edit.
+- [ ] Add captions, provenance notes, and meaningful alt text with the real visual assets.
+- [ ] Add the confirmed Little Plains contributor credits and collective-article link when available.
 - [ ] Replace the placeholder contact email (`hello@rustymeadows.com`) with the final public address.
 
 ## Design Direction
@@ -46,7 +49,7 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [x] Choose TypeScript or JavaScript.
 - [x] Choose styling approach.
 - [ ] Choose image optimization strategy.
-- [ ] Add formatting, linting, testing, and build checks.
+- [x] Add linting, typechecking, and static-export build checks.
 
 ## Hosting And Deployment
 

@@ -1,12 +1,12 @@
 # Site Brief
 
-Last updated: 2026-08-11
+Last updated: 2026-08-13
 
 ## Working Summary
 
 This repo is becoming a new personal website built with a static-exported Next.js app, repo-backed MDX content, and Cloudflare Pages deployment from GitHub.
 
-The first version is intentionally small: a homepage, project views, two lightweight experiment pages, focused MDX files, and a local-only DialKit playground for later typography/style tuning.
+The first version is intentionally focused: a homepage, three complete project case studies, two complete experiment case studies, focused MDX files, and a local-only DialKit playground for later typography/style tuning.
 
 The site has entered an incremental design pass while keeping the visual system focused and repo-native. The first explicit typography direction pairs Junicode 2 with Young Serif.
 
@@ -46,9 +46,18 @@ The site has entered an incremental design pass while keeping the visual system 
 - Keep visual decisions grounded in the site owner's work and personality.
 - Verify meaningful UI changes in the Codex in-app browser before calling them done.
 
+## Published Content Model
+
+- Projects: Pineapple Productions, Little Plains, and I’ve Seen the Future: Interpolations.
+- Experiments: Explore Art and **Creating Visuals with Agents**.
+- Each page owns its complete public narrative and media sequence in MDX.
+- Projects and experiments share the same static case-study presentation components and responsive landing shell.
+- Gray PNGs intentionally occupy every planned media position until the separate real-asset, rights, and provenance pass.
+- Orbs remains an independent study inside **Creating Visuals with Agents**, with a link to its full external archive; it is not a separate experiment page in this site.
+
 ## Technical Posture
 
 - Keep the Next.js app compatible with static export unless requirements justify server behavior.
 - Deploy through Cloudflare Pages from GitHub.
-- Prefer simple content formats and folder structures that future agents can inspect quickly.
+- Prefer simple content formats and folder structures that future agents can inspect quickly. Full project and experiment narratives live under `content/`, while their public registries remain explicit in `src/lib/content.ts`.
 - Record durable technical decisions in `docs/DECISIONS.md`.

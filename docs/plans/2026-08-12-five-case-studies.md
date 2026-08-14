@@ -16,12 +16,12 @@ The work is complete when Rusty has approved all five narratives and their discl
 - [x] (2026-08-12) Drafted and received Rusty's editorial approval for the Pineapple Productions case study in `docs/case-study-drafts/pineapple-productions.md`; implementation remains for the shared publishing pass.
 - [x] (2026-08-13) Reviewed the Little Plains collective source article and nearby repositories, completed the personal-contribution interview, wrote the full draft in `docs/case-study-drafts/little-plains.md`, and received Rusty's editorial approval. Publishing remains for the shared content-integration pass.
 - [x] (2026-08-13) Completed the I’ve Seen the Future / Interpolations source review and interview, wrote the full draft in `docs/case-study-drafts/ive-seen-the-future.md`, and received Rusty's editorial approval. The story treats Interpolations as the first public activation and excludes the ISTF Lab. Publishing remains for the shared content-integration pass.
-- [ ] Repeat the interview and approval loop for Explore Art. Fresh live-product and repository reconnaissance and the full experiment interview are complete, and the first full draft is written in `docs/case-study-drafts/explore-art.md`; Rusty's review and approval remain.
+- [x] (2026-08-13) Completed the Explore Art interview and draft, then incorporated Rusty's correction that the page should lead with the art-search product rather than vector infrastructure.
 - [x] (2026-08-13) Completed the Creating Visuals with Agents interview and first full draft. Visual-asset work will follow in a separate round.
-- [ ] Refactor the case-study content boundary so real narrative and media live with the MDX content rather than in generic viewer placeholders.
-- [ ] Add the five approved narratives and selected local assets, with captions, alt text, provenance, and external links where appropriate.
-- [ ] Run lint, typecheck, and static-export build; verify all five pages at desktop and mobile widths in the Codex in-app browser.
-- [ ] Update status, brief, decisions, backlog, and this plan to reflect the delivered content system and remaining follow-ups.
+- [x] (2026-08-13) Refactored the case-study content boundary so each project and experiment owns its real narrative and ordered media placements in MDX rather than generic viewer placeholders.
+- [x] (2026-08-13) Published all five narratives with existing gray PNG placeholders only, preserving the asset-selection round as separate work. Added the approved Orbs archive link and no unapproved real or generated imagery.
+- [x] (2026-08-13) Passed lint, typecheck, and static-export build. Verified the homepage and all five pages at 1360px and 390px in the Codex in-app browser, including exact titles, navigation, placeholder counts, footer presence, document width, and console errors.
+- [x] (2026-08-13) Updated status, brief, decisions, backlog, and this plan to reflect the delivered MDX content system and the remaining real-asset pass.
 
 ## Surprises & Discoveries
 
@@ -74,7 +74,9 @@ The work is complete when Rusty has approved all five narratives and their discl
 
 ## Outcomes & Retrospective
 
-The Pineapple Productions, Little Plains, and I’ve Seen the Future case studies have all been interviewed, drafted, and editorially approved. Explore Art's interview and first full draft are complete. Creating Visuals with Agents also has its first full draft. None is published yet. Update this section after every approved story and at final delivery.
+The five stories are now published through one repo-backed MDX pathway. The three projects retain distinct editorial arcs, I’ve Seen the Future is correctly scoped around Interpolations rather than the ISTF Lab, Explore Art leads with the art-search product, and **Creating Visuals with Agents** remains an open collection rather than a forced process framework. Draft scaffolding and editorial notes stay in the documentation layer rather than leaking into the public pages.
+
+This delivery intentionally completes the narrative and page-structure milestone, not the final visual edit. Every planned media position currently uses an existing flat-gray PNG. The next round should replace those one by one with sanitized, rights-reviewed, appropriately captioned assets without rewriting the content architecture.
 
 ## Context and Orientation
 

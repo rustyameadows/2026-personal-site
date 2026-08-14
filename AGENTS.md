@@ -11,8 +11,8 @@ The bootstrap should stay visually bare until the user explicitly asks for desig
 ## Current State
 
 - The repository contains a Next.js App Router site configured for static export.
-- Content lives in `content/home.mdx` and `content/projects/*.mdx`.
-- Project routes are generated from the explicit registry in `src/lib/content.ts`.
+- Content lives in `content/home.mdx`, `content/projects/*.mdx`, and `content/experiments/*.mdx`.
+- Project and experiment routes are generated from the explicit registries in `src/lib/content.ts`.
 - `/playground` is for local development only and returns not-found in production builds.
 - Styling is intentionally minimal black-and-white CSS for readable document flow.
 

@@ -4,7 +4,7 @@ This repository is the starting point for a new personal website.
 
 The site is a static-exported Next.js app with repo-backed MDX content and a local-only DialKit playground. It is intended to deploy from GitHub to Cloudflare Pages.
 
-This is a bare bootstrap, not a design pass. The app uses minimal black-and-white CSS only.
+The visual system remains deliberately restrained, with a black-and-white editorial foundation and repo-local typography and imagery.
 
 ## Read First
 
@@ -21,7 +21,8 @@ This is a bare bootstrap, not a design pass. The app uses minimal black-and-whit
 
 - Next.js App Router with `output: "export"`
 - MDX content under `content/`
-- Explicit project registry in `src/lib/content.ts`
+- Explicit project and experiment registries in `src/lib/content.ts`
+- Five complete MDX case studies: three projects and two experiments
 - Local-only `/playground` powered by DialKit
 - Minimal black-and-white styling; no Tailwind or UI kit
 - Cloudflare Pages target: build `npm run build`, publish `out`

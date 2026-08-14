@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ProjectStack } from "@/components/ProjectStack";
 import { SiteFooter } from "@/components/SiteFooter";
+import { renderExperimentCaseStudy } from "@/lib/caseStudyContent";
 import {
   experiments,
   getExperimentBySlug
@@ -47,9 +48,15 @@ export default async function ExperimentPage({ params }: ExperimentPageProps) {
     notFound();
   }
 
+  const experimentContent = renderExperimentCaseStudy(experiment.slug);
+
+  if (!experimentContent) {
+    notFound();
+  }
+
   return (
-    <main className="experiment-page">
-      <header className="experiment-page__chrome">
+    <main className="project-view-page experiment-case-study-page">
+      <header className="project-view-chrome">
         <Link href="/">Rusty Meadows</Link>
         <nav aria-label="Site navigation">
           <Link href="/#projects">Projects</Link>
@@ -58,17 +65,47 @@ export default async function ExperimentPage({ params }: ExperimentPageProps) {
         </nav>
       </header>
 
-      <article className="experiment-page__landing">
-        <div className="experiment-page__stack" aria-hidden="true">
-          <ProjectStack />
+      <section className="project-view-shell" aria-labelledby="project-title">
+        <div className="project-view-stage">
+          <article
+            aria-label={`${experiment.title} experiment content`}
+            className="project-view-content"
+          >
+            <section className="project-view-landing">
+              <div className="project-view-landing__media">
+                <Image
+                  alt={experiment.heroAlt}
+                  className="project-view-landing__image"
+                  fill
+                  priority
+                  sizes="(max-width: 860px) 100vw, 60vw"
+                  src={experiment.heroImage}
+                />
+              </div>
+
+              <div className="project-view-landing__copy">
+                <p className="case-study-landing__eyebrow">Experiment</p>
+                <h1 className="project-view-landing__title" id="project-title">
+                  {experiment.title}
+                </h1>
+                <p>{experiment.description}</p>
+                <a
+                  className="project-view-landing__cta"
+                  href="#case-study-content"
+                >
+                  Learn more <span aria-hidden="true">↓</span>
+                </a>
+              </div>
+            </section>
+
+            <div className="project-view-body">
+              <div className="case-study-content" id="case-study-content">
+                {experimentContent}
+              </div>
+            </div>
+          </article>
         </div>
-        <div className="experiment-page__copy">
-          <p>Experiment</p>
-          <h1>{experiment.title}</h1>
-          <p>{experiment.description}</p>
-          <p>This experiment is in progress. More details are coming soon.</p>
-        </div>
-      </article>
+      </section>
 
       <SiteFooter />
     </main>

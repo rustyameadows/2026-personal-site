@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import type { MouseEvent } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { ProjectStack } from "@/components/ProjectStack";
@@ -24,6 +24,7 @@ import {
 } from "@/lib/routeTransitions";
 
 type ProjectViewerProps = {
+  children?: ReactNode;
   experiments: ExperimentMeta[];
   project: ProjectMeta;
   projects: ProjectMeta[];
@@ -538,7 +539,7 @@ function ProjectLanding({
 
       <div className="project-view-landing__copy">
         <h1 className="project-view-landing__title" id="project-title">
-          {project.title}
+          {project.caseStudyTitle ?? project.title}
         </h1>
         <p>{project.description}</p>
         <a
@@ -553,6 +554,7 @@ function ProjectLanding({
 }
 
 export function ProjectViewer({
+  children,
   experiments,
   project,
   projects
@@ -570,6 +572,7 @@ export function ProjectViewer({
   const firstSectionId =
     projectSections[0]?.id ?? defaultProjectSections[0].id;
   const learnMoreSectionId = projectSections[1]?.id ?? firstSectionId;
+  const contentSectionId = children ? "case-study-content" : learnMoreSectionId;
   const [entryTransition, setEntryTransition] = useState<"load" | "switch">(
     "load"
   );
@@ -637,38 +640,45 @@ export function ProjectViewer({
 
   useLayoutEffect(() => {
     const intent = readRouteTransitionIntent();
+    let nextEntryTransition: "load" | "switch" | null = null;
 
     if (!intent) {
       if (renderedSlugRef.current !== project.slug) {
-        setEntryTransition("load");
+        nextEntryTransition = "load";
       }
 
       renderedSlugRef.current = project.slug;
       clearRouteTransitionClasses();
-      return;
-    }
-
-    if (handledIntentRef.current === intent.id) {
+    } else if (handledIntentRef.current === intent.id) {
       clearRouteTransitionClasses();
+    } else {
+      handledIntentRef.current = intent.id;
+      renderedSlugRef.current = project.slug;
+
+      if (intent.kind === "home-to-project" && intent.to === project.slug) {
+        nextEntryTransition = "load";
+      } else if (
+        intent.kind === "project-to-project" &&
+        intent.to === project.slug
+      ) {
+        nextEntryTransition = "switch";
+      } else {
+        nextEntryTransition = "load";
+      }
+
+      consumeRouteTransitionIntent();
+      clearRouteTransitionClasses();
+    }
+
+    if (!nextEntryTransition) {
       return;
     }
 
-    handledIntentRef.current = intent.id;
-    renderedSlugRef.current = project.slug;
+    const frame = window.requestAnimationFrame(() => {
+      setEntryTransition(nextEntryTransition);
+    });
 
-    if (intent.kind === "home-to-project" && intent.to === project.slug) {
-      setEntryTransition("load");
-    } else if (
-      intent.kind === "project-to-project" &&
-      intent.to === project.slug
-    ) {
-      setEntryTransition("switch");
-    } else {
-      setEntryTransition("load");
-    }
-
-    consumeRouteTransitionIntent();
-    clearRouteTransitionClasses();
+    return () => window.cancelAnimationFrame(frame);
   }, [project.slug]);
 
   function handleHomeClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -872,20 +882,26 @@ export function ProjectViewer({
             className="project-view-content"
           >
             <ProjectLanding
-              learnMoreSectionId={learnMoreSectionId}
+              learnMoreSectionId={contentSectionId}
               project={project}
               sectionId={firstSectionId}
             />
 
             <div className="project-view-body">
-              {projectSections.slice(1).map((section, sectionIndex) => (
-                <ProjectPlaceholderSection
-                  key={section.id}
-                  projectSlug={project.slug}
-                  section={section}
-                  sectionIndex={sectionIndex + 1}
-                />
-              ))}
+              {children ? (
+                <div className="case-study-content" id="case-study-content">
+                  {children}
+                </div>
+              ) : (
+                projectSections.slice(1).map((section, sectionIndex) => (
+                  <ProjectPlaceholderSection
+                    key={section.id}
+                    projectSlug={project.slug}
+                    section={section}
+                    sectionIndex={sectionIndex + 1}
+                  />
+                ))
+              )}
             </div>
           </article>
         </div>

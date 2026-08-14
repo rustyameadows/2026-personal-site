@@ -151,7 +151,7 @@ function applyValues(values: ProjectMotionTuningValues) {
 }
 
 function ProjectMotionDialKit() {
-  const initialValues = useMemo(readStoredValues, []);
+  const initialValues = useMemo(() => readStoredValues(), []);
   const values = useDialKit("Project Motion Curves", {
     fullLoad: {
       chromeTray: initialValues.fullLoad.chromeTray,

@@ -5,5 +5,6 @@ declare module "*.mdx" {
   export default MDXComponent;
 
   export const home: unknown;
+  export const experiment: unknown;
   export const project: unknown;
 }

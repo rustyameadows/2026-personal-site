@@ -1,4 +1,6 @@
 import HomeContent, { home as homeMeta } from "@content/home.mdx";
+import { experiment as creatingVisualsWithAgents } from "@content/experiments/creating-visuals-with-agents.mdx";
+import { experiment as exploreArt } from "@content/experiments/explore-art.mdx";
 import { project as downToShop } from "@content/projects/down-to-shop.mdx";
 import { project as iveSeenTheFuture } from "@content/projects/ive-seen-the-future.mdx";
 import { project as littlePlains } from "@content/projects/little-plains.mdx";
@@ -21,6 +23,7 @@ export type ProjectSection = {
 export type ProjectMeta = {
   slug: string;
   title: string;
+  caseStudyTitle?: string;
   featured: boolean;
   description: string;
   heroImage: string;
@@ -32,6 +35,8 @@ export type ExperimentMeta = {
   slug: string;
   title: string;
   description: string;
+  heroImage: string;
+  heroAlt: string;
 };
 
 export const home = homeMeta as HomeMeta;
@@ -52,18 +57,9 @@ export const featuredProjects = projects.filter((project) => project.featured);
 export const visibleProjects = featuredProjects.slice(0, 3);
 
 export const experiments: ExperimentMeta[] = [
-  {
-    slug: "explore-art",
-    title: "Explore Art",
-    description:
-      "A working experiment in finding, grouping, and moving through visual references."
-  },
-  {
-    slug: "orbs",
-    title: "Orbs",
-    description: "A small interactive study of shape, motion, and proximity."
-  }
-];
+  exploreArt,
+  creatingVisualsWithAgents
+].map((experiment) => experiment as ExperimentMeta);
 
 export function getProjectBySlug(slug: string): ProjectMeta | undefined {
   return projects.find((project) => project.slug === slug);

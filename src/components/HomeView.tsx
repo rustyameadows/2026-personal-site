@@ -29,7 +29,9 @@ export function HomeView({ experiments, home, projects }: HomeViewProps) {
     }
 
     clearRouteTransitionClasses();
-    setHasLoaded(true);
+    const frame = window.requestAnimationFrame(() => setHasLoaded(true));
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   return (

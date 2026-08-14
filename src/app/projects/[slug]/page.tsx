@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ProjectViewer } from "@/components/ProjectViewer";
+import { renderProjectCaseStudy } from "@/lib/caseStudyContent";
 import {
   experiments,
   getProjectBySlug,
@@ -34,7 +35,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: project.title
+    description: project.description,
+    title: project.caseStudyTitle ?? project.title
   };
 }
 
@@ -46,11 +48,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const projectContent = renderProjectCaseStudy(project.slug);
+
   return (
     <ProjectViewer
       experiments={experiments}
       project={project}
       projects={visibleProjects}
-    />
+    >
+      {projectContent}
+    </ProjectViewer>
   );
 }

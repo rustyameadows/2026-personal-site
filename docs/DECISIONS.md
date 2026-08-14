@@ -213,3 +213,13 @@ Status: Accepted
 Decision: Treat the fifth featured experiment as a balanced, image-led but editorially substantial, growing collection of unrelated things Rusty has made by working conversationally with AI agents and image-generation systems. Do not force a shared visual language, repeatable art-direction framework, or standalone case-study structure onto each entry. Give the strongest entries enough context to preserve what makes them distinct—for example, the Little Plains watercolors reached production, while Orbs documents a much deeper agent-driven exploration. Use Orbs, the watercolors, and other ready work as independent examples; link to detailed source archives where they already exist. Use the exact approved title **Creating Visuals with Agents**, and handle asset selection in a separate later round.
 
 Rationale: Rusty's central discovery is that reasoning models are unusually capable operators of image-generation and production tools: they can turn a brief into coordinated parallel prompts, evaluate the field, correct their instructions, and continue into manipulation, compositing, motion, and usable assets. The works themselves do not need to be aesthetically or functionally related. Over-defining the collection removes its play and surprise, while under-explaining it loses the substantive work and outcomes Rusty wants represented.
+
+## 0022 - Let Each Featured Page Own Its Narrative In MDX
+
+Date: 2026-08-13
+
+Status: Accepted
+
+Decision: Store the complete public narratives and ordered media placements for all three featured projects and both featured experiments in their own MDX files. Render both content types through the shared case-study shell and a small set of reusable fact and figure components. Use the existing flat-gray PNG library for every media placement during this content pass; replace those files with selected, rights-reviewed assets in a separate pass.
+
+Rationale: The prior shared viewer hard-coded generic prose and made the five stories structurally interchangeable. Page-owned MDX keeps each editorial arc legible and maintainable while preserving a consistent responsive presentation and static export. Separating narrative integration from asset selection lets the complete site be reviewed now without inventing, generating, or prematurely clearing visuals.

@@ -28,6 +28,8 @@ Current contents:
 - `docs/BACKLOG.md` for future work
 - `docs/plans/README.md` for future execution plans
 - working interview notes and publication drafts under `docs/case-study-notes/` and `docs/case-study-drafts/`
+- complete MDX narratives for three projects and two experiments, rendered through one shared case-study page system
+- reusable facts, figure, and figure-grid components backed by the existing flat-gray PNG placeholder library
 
 Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-only DialKit playground, and Cloudflare Pages.
 
@@ -56,30 +58,27 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Opened the outer project shell and case-study media fields to a full-width canvas with an ultra-wide maximum so imagery and the footer rule can reach the viewport edges, while preserving the original inset and 1400px maximum for case-study text.
 - Replaced every CSS-drawn project-content placeholder with reusable flat-gray PNG assets created locally with ImageMagick. Only the paper-stack graphics remain CSS-drawn.
 - Rebalanced the desktop project narrative into four substantial text sections with follow-up writing between media groups, six grayscale assets per standard project page, shorter full-bleed horizontal fields, and equal paired-media grids. Roman and Williams Guild retains its longer eight-section narrative.
-- Completed and received editorial approval for the Pineapple Productions case-study draft; publishing remains part of the shared content-integration pass.
-- Reviewed the Little Plains collective source article and nearby repositories, completed the personal-contribution interview, and received Rusty's editorial approval for the full case-study draft; publishing remains.
-- Clarified that I’ve Seen the Future is the umbrella brand and Interpolations its first public activation, explicitly excluding the ISTF Lab; completed initial live-site and repository reconnaissance and began the focused interview.
-- Completed the I’ve Seen the Future / Interpolations interview and received Rusty's editorial approval for the full case-study draft; publishing remains.
-- Began the Explore Art experiment case study with fresh live-product and repository review plus Rusty's art-history, museum, Warhol-exhibition, and earlier Discover Art context.
-- Completed the Explore Art interview and wrote the first full experiment case-study draft for Rusty's review.
-- Completed the first full **Creating Visuals with Agents** draft after Rusty's interview feedback. It is a balanced visual-and-written growing collection whose entries are not a shared visual system or standalone case studies, but each retains enough context to preserve its real significance, including production use for the Little Plains watercolors and the depth of the Orbs exploration. Asset work remains a separate later round.
+- Published complete MDX case studies for Pineapple Productions, Little Plains, and I’ve Seen the Future: Interpolations, with project-specific facts, narrative structure, and temporary gray image placements.
+- Published complete MDX experiment pages for Explore Art and **Creating Visuals with Agents**. Orbs is correctly presented as one entry in the latter collection and links to its complete external archive.
+- Moved narrative ownership out of the generic viewer and into each project or experiment MDX file while retaining a shared static-export-compatible presentation shell.
+- Replaced the public Orbs experiment route and index entry with **Creating Visuals with Agents**.
+- Kept draft metadata, visual directions, editorial cautions, and follow-up questions out of the public pages.
+- Verified the homepage and all five case studies in the Codex in-app browser at 1360px and 390px. Titles, navigation, placeholder media, document flow, and responsive widths passed with no console errors or horizontal overflow.
+- Passed `npm run lint`, `npm run typecheck`, and `npm run build` for the five-page publishing pass.
 
 ## Not Started
 
 - Define the site's audience, core message, sections, and content inventory.
-- Replace starter copy with real personal-site content.
 - Add more project MDX files.
-- Define the visual design direction later, after the bare bootstrap is accepted.
 - Continue evaluating the emerging typography direction before extending it to additional roles.
-- Replace the remaining project-viewer placeholder sections with real narrative, media, process, and outcome content.
-- Replace the temporary experiment-page descriptions and in-progress messages with real experiment content.
+- Replace the temporary gray case-study images with the separate, rights-aware real-asset edit.
 - Add accessibility checks beyond lint/typecheck/build.
 - Add CI and deploy preview checks.
 
 ## Next Likely Moves
 
-- Publish the five completed drafts through the repo-backed site content path using gray PNG placeholders, then complete the separate real-asset pass later.
-- After the five narratives are approved, move real case-study content and media into the repo-backed MDX publishing path.
+- Complete the separate real-asset pass, including sanitization, rights/provenance review, captions, and useful alt text.
+- Perform a final editorial polish pass after reviewing the five published narratives in context with real media.
 - Connect the GitHub repo to Cloudflare Pages with build command `npm run build` and output directory `out`.
 - Add additional projects by creating MDX files and registering them in `src/lib/content.ts`.
 - Use `/playground` later only when intentionally starting typography or CSS exploration.
@@ -88,9 +87,8 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 
 - What should the personal site primarily do: portfolio, writing hub, creative playground, resume/contact surface, experiments, or a blend?
 - What public identity, tone, and visual style should the site express?
-- What content already exists, and what needs to be written or gathered?
-- What real projects should replace the starter project?
-- What visual direction should the first public version express?
+- Which real visual assets should replace each gray case-study placement, and which require sanitization or rights confirmation?
+- What final public contact address should replace `hello@rustymeadows.com`?
 - Should future project registration stay explicit or move to a file discovery helper once there are more than a handful of pages?
 
 ## Update Rules

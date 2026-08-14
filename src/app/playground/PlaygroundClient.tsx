@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useState } from "react";
 
@@ -63,7 +64,7 @@ export function PlaygroundClient() {
             <abbr title="HyperText Markup Language">HTML</abbr>,{" "}
             <code>inline code</code>, <kbd>Command</kbd> + <kbd>K</kbd>,{" "}
             <samp>sample output</samp>, H<sub>2</sub>O, x<sup>2</sup>, and a{" "}
-            <a href="/">plain link</a>.
+            <Link href="/">plain link</Link>.
           </p>
           <p>
             <time dateTime="2026-06-05">June 5, 2026</time> is just a sample
