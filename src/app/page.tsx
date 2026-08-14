@@ -1,6 +1,12 @@
 import { HomeView } from "@/components/HomeView";
-import { featuredProjects, home } from "@/lib/content";
+import { experiments, home, visibleProjects } from "@/lib/content";
 
 export default function HomePage() {
-  return <HomeView home={home} projects={featuredProjects} />;
+  return (
+    <HomeView
+      experiments={experiments}
+      home={home}
+      projects={visibleProjects}
+    />
+  );
 }

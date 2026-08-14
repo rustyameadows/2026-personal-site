@@ -1,0 +1,148 @@
+# Little Plains
+
+Draft status: Editorially approved by Rusty Meadows on 2026-08-13. Not yet published.
+
+## Page metadata
+
+**Project:** Little Plains
+**Working headline:** The tool hiding in the backend
+**Working summary:** I joined Little Plains to build an agentic chat experience. The visual-retrieval system that agent needed became Explore—the product breakthrough that helped turn two years of ideas, archives, and experiments into a website the team could finally ship.
+**Role:** Product prototyping, visual retrieval and embeddings, knowledge systems, Ask and Voice engineering, evaluation and performance, frontend integration, engineering leadership, and launch
+**Timeline:** Final two to three months of a broader two-year effort
+**Status:** Launched and continuing to evolve
+
+## The tool hiding in the backend
+
+Little Plains had spent more than two years trying to make a website equal to the studio itself. There was an archive of the work and thinking that stretched back through Little Plains and Gin Lane. There were earlier websites, a chatbot, a proposal that had grown into a working codebase, and many competing ideas about what the final experience could be.
+
+What it did not yet have was a version the team believed it could land.
+
+I joined for the final two to three months with a relatively contained assignment: take a fresh run at the agentic chat experience for the new site. I could build on earlier experiments where they were useful, but the current system would largely be new. At the time, the clearest product idea was still that the website might have a chatbot.
+
+The version we shipped became something more visual and more particular: a website that could search its own work, answer questions from a reviewed body of knowledge, and move naturally among exploration, conversation, and voice. My role expanded with it. I built the current visual-retrieval and knowledge systems, the Ask agent and its evaluation infrastructure, and most of the Voice implementation. I prototyped product directions, worked throughout the frontend, and ran the engineering effort through final integration, QA, and launch.
+
+The decisive feature was not in the original brief. It was hiding in a tool I had made for ourselves.
+
+> **Visual 01 — The finished experience**
+> Open on a quiet, full-width capture or short loop of the live site moving from its visual field into the OmniBar. Let the interface establish the argument before showing any architecture: this is a studio site organized around seeing and asking, not a chatbot placed over a conventional portfolio.
+
+## The first question exposed the missing system
+
+One of the first things somebody would ask a studio chatbot is also one of the most difficult for a normal website to answer: “Show me some illustration work.” Or, “Show me something playful.” Or, “What have you made that feels like this image?”
+
+Little Plains had the work, but its individual images, films, interfaces, and process artifacts had not been organized for those questions. Project pages could tell the agent where a case study lived. They could not tell it which image inside that case study contained a hand-drawn character, a green healthcare interface, or a particular kind of typography.
+
+So before the agent could show anything, I had to build a way for it to see.
+
+I created the current visual-retrieval system from scratch in Rails. It pulls the studio's media into a searchable corpus, preserves the context of where each artifact appeared, and combines multimodal embeddings with model-generated visual analysis, source text, tags, and ranking. Sanity remained the source of truth for published content; the search layer makes the material inside it legible to the agent and retrievable at the level people actually ask for.
+
+This was initially infrastructure. I built a large internal canvas so I could search the corpus, inspect results, tune relevance, and curate what the system was doing. It was a diagnostic surface for answering questions like: Did the embeddings understand the image? Did the text help or hurt? Was the right artifact ranked for the right reason?
+
+Then the internal tool changed the product.
+
+> **Visual 02 — Teaching the system to see**
+> Show a compact sequence from source project to individual media placement to enrichment and ranked result. Pair it with two or three real, permission-cleared queries whose answers cannot be expressed by project titles alone.
+
+## The demo that made the website feel possible
+
+The public site was still oriented around chat, and the team felt it was underwhelming. Little Plains is a visual practice; beginning with an empty conversation made visitors do the work before they had seen enough to know what they wanted to ask.
+
+When I showed the team the full-screen visual-search canvas from the backend, I suggested that the useful thing we had hidden inside the system might actually belong at the center of the website.
+
+I built a public-facing version overnight.
+
+That demo changed the energy of the project. The team could see the studio's work spread across the screen, search it in ordinary language, and move from a particular artifact back into the project that gave it meaning. Something built to evaluate the pipeline became the foundation of Explore. The website no longer needed to introduce itself with a chatbot. It could show the work first, let visitors act on what they saw, and offer conversation when they wanted to go deeper.
+
+That working prototype moved the project from “we may still be far away” to something people could rally around and finish.
+
+> **Visual 03 — The product turn**
+> Place the internal visual-search/curation canvas beside the first overnight public Explore prototype and the final experience. Preserve their family resemblance. The caption should make the transition explicit: evaluation tool → product demo → primary public mode.
+
+## Giving the site memory as well as eyes
+
+Visual retrieval solved only half the agent's problem. It could find things to show, but it also needed a reliable way to explain the studio, its work, and its point of view.
+
+The early agent checked Sanity and other sources live, even for basic questions that appeared again and again. That made simple answers unnecessarily slow. Many of the questions we were testing were variations of the same small set, so I began making compact, reviewed fact sheets—effectively a set of cheat sheets that kept common studio and project knowledge close at hand. I iterated through several versions as we learned what the agent needed in order to be both fast and useful.
+
+The studio also had a much deeper corpus: roughly 150 archival documents that had been assembled and processed before I arrived. I carried that work into the current knowledge system, building a pipeline that could process broad collections of documents and make them available for questions requiring research and context.
+
+The distinction mattered. Fast knowledge handled stable facts and common questions. Deep knowledge preserved the source material for questions that deserved real investigation. The broader knowledge workflow also allowed model-proposed changes to be reviewed before publication, rather than allowing every meeting note or stray document to silently become the studio's public position.
+
+Together, the systems gave the site memory and eyes: reviewed language for what Little Plains knows and a visual corpus for showing what it has made.
+
+> **Visual 04 — Memory and eyes**
+> A restrained diagram rather than an admin screenshot. One side follows public content and individual media into visual retrieval; the other follows reviewed facts and archival documents into fast and deep knowledge. Both meet in Explore, Ask, and Voice. Make human review and source authority visible.
+
+## Three ways into the same body of work
+
+The final product has three closely related modes.
+
+**Explore** searches individual visual artifacts using language, color, or a reference image. Results remain connected to their source projects, so open-ended discovery does not strip the work of context.
+
+**Ask** uses the reviewed knowledge and visual corpus together. I built the current agent, including its multi-turn behavior, retrieval and tool use, structured interface responses, evaluation system, and much of the performance work behind it. It can answer in prose, show relevant work, and carry the conversation forward without treating every turn as a new search.
+
+**Voice** shares that context rather than operating as a separate demo. An early voice experiment already existed when I joined; I rebuilt it through at least five substantial iterations to reach the integrated version on the site. It is still evolving, but it belongs to the same conversation as Ask.
+
+The modes eventually came together in the OmniBar, a persistent object that lets the visitor move among navigation, visual search, typing, and speech. The initial idea to combine those surfaces came from the design team. I built an early pass at much of its layout, drawer, options, and behavior, then worked with the frontend team as they refined the transitions and interface details. That pattern—an idea becoming working software, then getting sharper through collective use—was characteristic of the whole project.
+
+> **Visual 05 — Explore, Ask, and Voice**
+> Use one continuous screen recording rather than three disconnected screenshots: begin with a visual query, open an artifact's project, ask a contextual follow-up, then move into Voice without losing the conversation.
+
+## Working software changed the conversation
+
+This was a larger, more multidisciplinary team than I usually work with. There was extensive work before I arrived, and the finished site combined product direction, brand language, editorial judgment, visual and interaction design, motion, frontend craft, archival research, and multiple generations of technical experiments.
+
+My most useful contribution was often to give an unresolved idea a form that everybody could react to. We used working prototypes as design material. A conversation about how navigation and chat might coexist could become several functional variants. Search relevance could be judged against real media instead of a mock result set. Voice behavior could be tested with interruption, latency, and context intact. The prototype did not remove the need for judgment; it made the decisions concrete enough for the team to make them.
+
+I used Codex and the OpenAI API aggressively across that process—not only inside the product, but as materials for building it. They helped me move between system architecture, interface experiments, repetitive production work, evaluation, and implementation quickly enough to keep ideas alive while the team was still discussing them.
+
+The faster we could make something real, the more demanding the conversation became. That was the productive part.
+
+> **Visual 06 — Prototypes as design material**
+> An edited contact sheet or short reel of a few meaningfully different interface studies—not every discarded version. Annotate the question each prototype answered and the decision it made possible.
+
+## Twelve small paintings with a job to do
+
+One of my favorite details began with the color-search control.
+
+A functional version already existed: twelve exact, named color anchors, each backed by an authored group of results that the retrieval system could extend. The interface presented them as a continuous digital spectrum with small geometric markers. It was precise, but it felt anonymous beside the rest of the site. I wanted each choice to feel like pigment—irregular, physical, and alive—without weakening the taxonomy or turning the control into decoration.
+
+Working with GPT Image and Codex, I first compared five complete visual families, from square chips and dots to dry brush and layered washes. Then I pushed six tighter painted directions. We chose an asymmetric “tide-edge” system: twelve translucent bodies with denser pigment collecting near one edge, related as a family but not produced by recoloring the same silhouette.
+
+The first animation simply enlarged the marks. It made them feel closer, not wetter. I built a review lab and used Blue as the workshop color to compare different ideas at actual size, on multiple backgrounds and playback speeds, with frame scrubbing and reduced motion. The retained direction moved the pigment *inside* an always-visible mark: it swells and deepens on hover, then reverses through the same states when the pointer leaves.
+
+I generated each final color separately and turned it into sixteen baked painted states—192 frames across the family. Frame zero is always the exact resting image. When Green, Mint, and Cyan drifted during their sequences, I kept the paintings and corrected their position with measured whole-pixel translations instead of regenerating, scaling, or blurring them. There is no fluid simulation or runtime morph hiding underneath; the organic material is generated, while the geometry and playback are deterministic.
+
+The finished behavior is just as constrained. Hover provides local feedback but never performs a search. A committed color holds its deepest painted state. Touch and reduced-motion users receive stable states, and a missing animation falls back to the original mark. Beneath the painted surface, an authored group of results appears immediately and visual retrieval extends it.
+
+It is a small piece of the interface, but it contains the project's whole attitude. AI expanded what I could make, but the finished control was selected, timed, and constrained by hand—and it did an actual job.
+
+> **Visual 07 — Watercolor from generation to control**
+> Give this room. Begin with the five-family comparison board and selected tide-edge row. Show the rejected Blue motion directions beside the retained pigment swell, then the final 192-frame contact sheet and a large actual-size loop. End with the complete control revealing real color-search results. Avoid reducing the process to a tiny UI crop.
+
+## Landing it
+
+For roughly the final two months, I ran the engineering effort. I managed the repository and integrations, merged work from across the team, kept the complete system running, triaged QA through Linear, resolved agent and backend-performance problems, carried out much of the final evaluation, and handled substantial launch infrastructure.
+
+The team participated heavily in QA and in shaping the final interface. My responsibility was to keep the moving pieces converging: a Next.js public experience, a Rails retrieval and knowledge system, real-time voice, multiple model-backed workflows, a living content source, and frontend work arriving from several people at once.
+
+Shipping the site was a real outcome, especially for a project that had remained possible for so long without feeling inevitable. But the more lasting outcome for me was learning how to work across product, design, and engineering inside a bigger team without treating those as separate phases. I could bring a backend diagnostic into a product conversation, turn visual experimentation into accessible interface behavior, and use evaluation to shape the design rather than merely grade it afterward.
+
+The project began, for me, with a chatbot. It landed when we realized the more interesting idea was a website capable of looking at its own work—and when working software gave the team enough momentum to finish what it had been imagining.
+
+> **Visual 08 — The shipped system**
+> Close on the live experience across desktop and mobile, with the visual field, OmniBar, and project handoff all represented. If possible, pair it with a concise launch-day artifact rather than another internal admin view.
+
+## Credits and collective context
+
+Little Plains was a team project built on approximately two years of archival, strategic, design, and technical work. The public narrative should include a concise final credit list and link to the Little Plains team's longer account of how the site was made. My focus was product prototyping; visual retrieval and embeddings; the current knowledge and Ask systems; most of the Voice implementation; evaluation and performance; frontend integration; final engineering leadership; and launch.
+
+## Editorial cautions before publication
+
+- Confirm the final public status language and the preferred name for the site before publication.
+- Add the collective article link and agreed contributor credits without interrupting the personal narrative with a long roll call.
+- Keep the earlier corpus, proposal, brand, original chatbot concept, and OmniBar concept attributed to the wider team; do not imply sole authorship of the two-year effort.
+- Confirm whether “roughly 150 archival documents” should be published as a specific count or described more generally.
+- Decide whether Gemini, GPT Image, Codex, and the OpenAI API should be named or described in provider-neutral language for durability.
+- Treat the watercolor workflow as a substantial process story. Rusty may add more firsthand detail after reviewing this first version.
+- Use only public or permission-cleared Little Plains client work in screenshots, generation artifacts, and search-result demonstrations.

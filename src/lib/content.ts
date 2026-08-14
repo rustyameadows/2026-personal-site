@@ -22,7 +22,16 @@ export type ProjectMeta = {
   slug: string;
   title: string;
   featured: boolean;
+  description: string;
+  heroImage: string;
+  heroAlt: string;
   sections?: ProjectSection[];
+};
+
+export type ExperimentMeta = {
+  slug: string;
+  title: string;
+  description: string;
 };
 
 export const home = homeMeta as HomeMeta;
@@ -40,7 +49,26 @@ export const projects: ProjectMeta[] = [
 ].map((project) => project as ProjectMeta);
 
 export const featuredProjects = projects.filter((project) => project.featured);
+export const visibleProjects = featuredProjects.slice(0, 3);
+
+export const experiments: ExperimentMeta[] = [
+  {
+    slug: "explore-art",
+    title: "Explore Art",
+    description:
+      "A working experiment in finding, grouping, and moving through visual references."
+  },
+  {
+    slug: "orbs",
+    title: "Orbs",
+    description: "A small interactive study of shape, motion, and proximity."
+  }
+];
 
 export function getProjectBySlug(slug: string): ProjectMeta | undefined {
   return projects.find((project) => project.slug === slug);
+}
+
+export function getExperimentBySlug(slug: string): ExperimentMeta | undefined {
+  return experiments.find((experiment) => experiment.slug === slug);
 }

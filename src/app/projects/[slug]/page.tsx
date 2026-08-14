@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ProjectViewer } from "@/components/ProjectViewer";
-import { getProjectBySlug, projects } from "@/lib/content";
+import {
+  experiments,
+  getProjectBySlug,
+  projects,
+  visibleProjects
+} from "@/lib/content";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -41,5 +46,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  return <ProjectViewer project={project} projects={projects} />;
+  return (
+    <ProjectViewer
+      experiments={experiments}
+      project={project}
+      projects={visibleProjects}
+    />
+  );
 }
