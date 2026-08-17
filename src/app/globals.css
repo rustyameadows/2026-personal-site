@@ -306,15 +306,27 @@ ul {
   appearance: none;
   background: transparent;
   border: 0;
-  color: black;
   cursor: pointer;
-  font: inherit;
   margin: 0;
   padding: 0;
-  text-decoration: underline;
 }
 
-.site-footer button:focus-visible {
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.site-footer__links a,
+.site-footer__links button {
+  color: black;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.site-footer__links a:focus-visible,
+.site-footer__links button:focus-visible {
   outline: 2px solid black;
   outline-offset: 4px;
 }

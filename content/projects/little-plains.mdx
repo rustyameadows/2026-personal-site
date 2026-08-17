@@ -9,7 +9,7 @@ export const project = {
   title: "Little Plains",
   featured: true,
   description:
-    "I joined Little Plains to build an agentic chat experience. The visual-retrieval system that agent needed became Explore—the product breakthrough that helped turn two years of ideas, archives, and experiments into a website the team could finally ship.",
+    "I joined Little Plains to build an agentic chat experience. The visual-retrieval system that agent needed became Explore. That breakthrough helped turn two years of ideas, archives, and experiments into a website the team could finally ship.",
   heroImage: "/placeholders/gray-panorama-light.png",
   heroAlt: ""
 };
@@ -18,8 +18,7 @@ export const project = {
   items={[
     {
       label: "Role",
-      value:
-        "Product prototyping, visual retrieval and embeddings, knowledge systems, Ask and Voice engineering, evaluation and performance, frontend integration, engineering leadership, and launch"
+      value: "Product prototyping, AI systems, and engineering leadership"
     },
     {
       label: "Timeline",
@@ -37,9 +36,9 @@ What it did not yet have was a version the team believed it could land.
 
 I joined for the final two to three months with a relatively contained assignment: take a fresh run at the agentic chat experience for the new site. I could build on earlier experiments where they were useful, but the current system would largely be new. At the time, the clearest product idea was still that the website might have a chatbot.
 
-The version we shipped became something more visual and more particular: a website that could search its own work, answer questions from a reviewed body of knowledge, and move naturally among exploration, conversation, and voice. My role expanded with it. I built the current visual-retrieval and knowledge systems, the Ask agent and its evaluation infrastructure, and most of the Voice implementation. I prototyped product directions, worked throughout the frontend, and ran the engineering effort through final integration, QA, and launch.
+The version we shipped was much more visual. It could search its own work, answer questions from a reviewed body of knowledge, and move among exploration, conversation, and voice. My role expanded with it. I built the current visual-retrieval and knowledge systems, the Ask agent and its evaluation infrastructure, and most of the Voice implementation. I prototyped product directions, worked throughout the frontend, and ran the engineering effort through final integration, QA, and launch.
 
-The decisive feature was not in the original brief. It was hiding in a tool I had made for ourselves.
+The feature that unlocked the site came from a tool I had made for ourselves.
 
 <CaseStudyFigure
   caption="The visual field and OmniBar"
@@ -77,7 +76,7 @@ When I showed the team the full-screen visual-search canvas from the backend, I 
 
 I built a public-facing version overnight.
 
-That demo changed the energy of the project. The team could see the studio's work spread across the screen, search it in ordinary language, and move from a particular artifact back into the project that gave it meaning. Something built to evaluate the pipeline became the foundation of Explore. The website no longer needed to introduce itself with a chatbot. It could show the work first, let visitors act on what they saw, and offer conversation when they wanted to go deeper.
+That demo changed the energy of the project. The team could see the studio's work spread across the screen, search it in ordinary language, and move from a particular artifact back into the project that gave it meaning. Something built to evaluate the pipeline became the foundation of Explore. Putting the work first gave visitors something to respond to before asking them to begin a conversation.
 
 That working prototype moved the project from “we may still be far away” to something people could rally around and finish.
 
@@ -94,11 +93,11 @@ That working prototype moved the project from “we may still be far away” to 
 
 Visual retrieval solved only half the agent's problem. It could find things to show, but it also needed a reliable way to explain the studio, its work, and its point of view.
 
-The early agent checked Sanity and other sources live, even for basic questions that appeared again and again. That made simple answers unnecessarily slow. Many of the questions we were testing were variations of the same small set, so I began making compact, reviewed fact sheets—effectively a set of cheat sheets that kept common studio and project knowledge close at hand. I iterated through several versions as we learned what the agent needed in order to be both fast and useful.
+The early agent checked Sanity and other sources live, even for basic questions that appeared again and again. That made simple answers unnecessarily slow. Many of the questions were variations of the same small set, so I started making compact, reviewed fact sheets. They were cheat sheets that kept common studio and project knowledge close at hand. I iterated through several versions as we learned what the agent needed to answer quickly and accurately.
 
 The studio also had a much deeper corpus: roughly 150 archival documents that had been assembled and processed before I arrived. I carried that work into the current knowledge system, building a pipeline that could process broad collections of documents and make them available for questions requiring research and context.
 
-The distinction mattered. Fast knowledge handled stable facts and common questions. Deep knowledge preserved the source material for questions that deserved real investigation. The broader knowledge workflow also allowed model-proposed changes to be reviewed before publication, rather than allowing every meeting note or stray document to silently become the studio's public position.
+Fast knowledge handled stable facts and common questions. Deep knowledge preserved the source material for questions that deserved real investigation. Model-proposed changes could also be reviewed before publication. A meeting note or stray document could not silently become the studio's public position.
 
 Together, the systems gave the site memory and eyes: reviewed language for what Little Plains knows and a visual corpus for showing what it has made.
 
@@ -111,13 +110,13 @@ Together, the systems gave the site memory and eyes: reviewed language for what 
 
 The final product has three closely related modes.
 
-**Explore** searches individual visual artifacts using language, color, or a reference image. Results remain connected to their source projects, so open-ended discovery does not strip the work of context.
+**Explore** searches individual visual artifacts using language, color, or a reference image. Every result links back to its source project.
 
 **Ask** uses the reviewed knowledge and visual corpus together. I built the current agent, including its multi-turn behavior, retrieval and tool use, structured interface responses, evaluation system, and much of the performance work behind it. It can answer in prose, show relevant work, and carry the conversation forward without treating every turn as a new search.
 
-**Voice** shares that context rather than operating as a separate demo. An early voice experiment already existed when I joined; I rebuilt it through at least five substantial iterations to reach the integrated version on the site. It is still evolving, but it belongs to the same conversation as Ask.
+**Voice** uses the same context. An early voice experiment already existed when I joined; I rebuilt it through at least five substantial iterations to reach the integrated version on the site. It is still evolving, but it belongs to the same conversation as Ask.
 
-The modes eventually came together in the OmniBar, a persistent object that lets the visitor move among navigation, visual search, typing, and speech. The initial idea to combine those surfaces came from the design team. I built an early pass at much of its layout, drawer, options, and behavior, then worked with the frontend team as they refined the transitions and interface details. That pattern—an idea becoming working software, then getting sharper through collective use—was characteristic of the whole project.
+The modes eventually came together in the OmniBar, a persistent object that lets the visitor move among navigation, visual search, typing, and speech. The initial idea to combine those surfaces came from the design team. I built an early pass at much of its layout, drawer, options, and behavior, then worked with the frontend team as they refined the transitions and interface details. That happened throughout the project. An idea became working software, then got sharper as the team used it.
 
 <CaseStudyFigure
   caption="Explore, Ask, and Voice sharing one conversation"
@@ -128,11 +127,9 @@ The modes eventually came together in the OmniBar, a persistent object that lets
 
 This was a larger, more multidisciplinary team than I usually work with. There was extensive work before I arrived, and the finished site combined product direction, brand language, editorial judgment, visual and interaction design, motion, frontend craft, archival research, and multiple generations of technical experiments.
 
-My most useful contribution was often to give an unresolved idea a form that everybody could react to. We used working prototypes as design material. A conversation about how navigation and chat might coexist could become several functional variants. Search relevance could be judged against real media instead of a mock result set. Voice behavior could be tested with interruption, latency, and context intact. The prototype did not remove the need for judgment; it made the decisions concrete enough for the team to make them.
+My most useful contribution was often to give an unresolved idea a form that everybody could react to. We used working prototypes as design material. A conversation about how navigation and chat might coexist could become several functional variants. Search relevance could be judged against real media instead of a mock result set. Voice behavior could be tested with interruption, latency, and context intact. Working versions focused the discussion. The team could react to actual behavior instead of debating an abstraction.
 
-I used Codex and the OpenAI API aggressively across that process—not only inside the product, but as materials for building it. They helped me move between system architecture, interface experiments, repetitive production work, evaluation, and implementation quickly enough to keep ideas alive while the team was still discussing them.
-
-The faster we could make something real, the more demanding the conversation became. That was the productive part.
+I used Codex and the OpenAI API aggressively in both the product and the work of building it. They helped me move between system architecture, interface experiments, repetitive production work, evaluation, and implementation quickly enough to keep ideas alive while the team was still discussing them.
 
 <CaseStudyFigure
   caption="Working interface studies and the questions they resolved"
@@ -143,17 +140,17 @@ The faster we could make something real, the more demanding the conversation bec
 
 One of my favorite details began with the color-search control.
 
-A functional version already existed: twelve exact, named color anchors, each backed by an authored group of results that the retrieval system could extend. The interface presented them as a continuous digital spectrum with small geometric markers. It was precise, but it felt anonymous beside the rest of the site. I wanted each choice to feel like pigment—irregular, physical, and alive—without weakening the taxonomy or turning the control into decoration.
+A functional version already existed: twelve exact, named color anchors, each backed by an authored group of results that the retrieval system could extend. The interface presented them as a continuous digital spectrum with small geometric markers. It was precise, but it felt anonymous beside the rest of the site. I wanted each choice to feel like pigment: irregular, physical, and alive, without weakening the taxonomy or turning the control into decoration.
 
 Working with GPT Image and Codex, I first compared five complete visual families, from square chips and dots to dry brush and layered washes. Then I pushed six tighter painted directions. We chose an asymmetric “tide-edge” system: twelve translucent bodies with denser pigment collecting near one edge, related as a family but not produced by recoloring the same silhouette.
 
 The first animation simply enlarged the marks. It made them feel closer, not wetter. I built a review lab and used Blue as the workshop color to compare different ideas at actual size, on multiple backgrounds and playback speeds, with frame scrubbing and reduced motion. The retained direction moved the pigment *inside* an always-visible mark: it swells and deepens on hover, then reverses through the same states when the pointer leaves.
 
-I generated each final color separately and turned it into sixteen baked painted states—192 frames across the family. Frame zero is always the exact resting image. When Green, Mint, and Cyan drifted during their sequences, I kept the paintings and corrected their position with measured whole-pixel translations instead of regenerating, scaling, or blurring them. There is no fluid simulation or runtime morph hiding underneath; the organic material is generated, while the geometry and playback are deterministic.
+I generated each final color separately and turned it into sixteen baked painted states, for 192 frames across the family. Every sequence starts on the exact resting image, and I corrected drift in Green, Mint, and Cyan with measured whole-pixel translations, without regenerating, scaling, blurring, simulating, or morphing anything at runtime. The painted material is generated. The geometry and playback are deterministic.
 
-The finished behavior is just as constrained. Hover provides local feedback but never performs a search. A committed color holds its deepest painted state. Touch and reduced-motion users receive stable states, and a missing animation falls back to the original mark. Beneath the painted surface, an authored group of results appears immediately and visual retrieval extends it.
+The implementation is tightly controlled too. Hover provides local feedback but never performs a search. A committed color holds its deepest painted state. Touch and reduced-motion users receive stable states, and a missing animation falls back to the original mark. Beneath the painted surface, an authored group of results appears immediately and visual retrieval extends it.
 
-It is a small piece of the interface, but it contains the project's whole attitude. AI expanded what I could make, but the finished control was selected, timed, and constrained by hand—and it did an actual job.
+The result is a small control that does a real job. AI made the painted material possible. I selected the direction, corrected the frames, and defined exactly how the control behaves.
 
 <CaseStudyFigureGrid
   columns={3}
@@ -175,11 +172,11 @@ It is a small piece of the interface, but it contains the project's whole attitu
 
 For roughly the final two months, I ran the engineering effort. I managed the repository and integrations, merged work from across the team, kept the complete system running, triaged QA through Linear, resolved agent and backend-performance problems, carried out much of the final evaluation, and handled substantial launch infrastructure.
 
-The team participated heavily in QA and in shaping the final interface. My responsibility was to keep the moving pieces converging: a Next.js public experience, a Rails retrieval and knowledge system, real-time voice, multiple model-backed workflows, a living content source, and frontend work arriving from several people at once.
+The team participated heavily in QA and in shaping the final interface. My responsibility was to get a Next.js public site, a Rails retrieval and knowledge system, real-time voice, model-backed workflows, Sanity content, and frontend work from several people into one release.
 
-Shipping the site was a real outcome, especially for a project that had remained possible for so long without feeling inevitable. But the more lasting outcome for me was learning how to work across product, design, and engineering inside a bigger team without treating those as separate phases. I could bring a backend diagnostic into a product conversation, turn visual experimentation into accessible interface behavior, and use evaluation to shape the design rather than merely grade it afterward.
+Shipping mattered, especially after two years of the website feeling possible without feeling inevitable. I also learned how to work across product, design, and engineering inside a bigger team without treating them as separate phases. I could bring a backend diagnostic into a product conversation, turn visual experimentation into accessible interface behavior, and use evaluation to shape the design instead of grading it afterward.
 
-The project began, for me, with a chatbot. It landed when we realized the more interesting idea was a website capable of looking at its own work—and when working software gave the team enough momentum to finish what it had been imagining.
+I joined to build a chatbot. We shipped a website that could look at its own work because working software gave the team something concrete to rally around.
 
 <CaseStudyFigureGrid
   columns={3}
@@ -190,6 +187,6 @@ The project began, for me, with a chatbot. It landed when we realized the more i
   ]}
 />
 
-## Collective context
+## Team context
 
-Little Plains was a team project built on approximately two years of archival, strategic, design, and technical work. My focus was product prototyping; visual retrieval and embeddings; the current knowledge and Ask systems; most of the Voice implementation; evaluation and performance; frontend integration; final engineering leadership; and launch.
+Little Plains was a team project built on approximately two years of archival, strategic, design, and technical work. My focus was product prototyping, visual retrieval and embeddings, the current knowledge and Ask systems, most of the Voice implementation, evaluation and performance, frontend integration, final engineering leadership, and launch.

@@ -58,9 +58,17 @@ export function SiteFooter() {
 
   return (
     <footer className="site-footer">
-      <button onClick={handleContactClick} type="button">
-        Contact
-      </button>
+      <div className="site-footer__links">
+        <button onClick={handleContactClick} type="button">
+          Contact
+        </button>
+        <a href="https://x.com/rameadows" rel="me">
+          X
+        </a>
+        <a href="https://www.linkedin.com/in/rustymeadows/" rel="me">
+          LinkedIn
+        </a>
+      </div>
       <span>Rusty Meadows</span>
       <span>© 2026</span>
       {contactToast ? (

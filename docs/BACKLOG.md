@@ -27,7 +27,7 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [x] Replace the remaining project-page placeholder prose with real case-study content.
 - [x] Publish complete Explore Art and **Creating Visuals with Agents** experiment content; retain Orbs as an entry in the latter.
 - [ ] Replace all gray case-study media placements with the separate sanitized, rights-aware real-asset edit.
-- [ ] Add captions, provenance notes, and meaningful alt text with the real visual assets.
+- [ ] Replace the provisional experiment asset captions where needed, then add provenance notes and meaningful alt text with the real visual assets.
 - [ ] Add the confirmed Little Plains contributor credits and collective-article link when available.
 - [ ] Replace the placeholder contact email (`hello@rustymeadows.com`) with the final public address.
 

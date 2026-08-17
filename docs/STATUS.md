@@ -65,6 +65,13 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Kept draft metadata, visual directions, editorial cautions, and follow-up questions out of the public pages.
 - Verified the homepage and all five case studies in the Codex in-app browser at 1360px and 390px. Titles, navigation, placeholder media, document flow, and responsive widths passed with no console errors or horizontal overflow.
 - Passed `npm run lint`, `npm run typecheck`, and `npm run build` for the five-page publishing pass.
+- Added confirmed X and LinkedIn profile links beside Contact in the shared site footer.
+- Added provisional, asset-specific captions to all 24 content placeholders across Explore Art and **Creating Visuals with Agents**, giving the future real-asset pass both visible caption slots and a concrete editorial brief.
+- Verified the updated experiment captions and shared footer in the Codex in-app browser at desktop and 390px mobile widths, with no horizontal overflow or console errors.
+- Standardized the fact block on all five published case studies as **Role**, **Timeline**, and **Status**, in that order, with project-specific answers.
+- Completed a voice pass across the three project and two experiment narratives, removing em dashes, en dashes, and formulaic language while preserving the facts and the distinct character of each story.
+- Verified all five revised pages in the Codex in-app browser at 1280px and 390px. The shared metadata structure, captions, document flow, and responsive widths passed with no console errors or horizontal overflow.
+- Passed `npm run lint`, `npm run typecheck`, and `npm run build` after the metadata and editorial pass.
 
 ## Not Started
 
