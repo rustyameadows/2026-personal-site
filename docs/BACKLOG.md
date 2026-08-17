@@ -22,6 +22,7 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [ ] Decide what content must exist for the first public version.
 - [x] Decide whether content should live in Markdown/MDX, a CMS, local data files, or another source.
 - [ ] Replace starter homepage copy with real copy.
+- [ ] Continue the full homepage at `/home` and replace the temporary root teaser when it is ready.
 - [x] Replace starter project pages with real project content.
 - [x] Add representative hero assets and sourced introductions for the current project landers.
 - [x] Replace the remaining project-page placeholder prose with real case-study content.

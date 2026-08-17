@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-08-13
+Last updated: 2026-08-17
 
 ## Current State
 
@@ -16,7 +16,7 @@ Current contents:
 - TypeScript and ESLint configuration
 - MDX content under `content/`
 - explicit content registry under `src/lib/content.ts`
-- homepage route, project and experiment detail routes, not-found route, and local-only playground route under `src/app/`
+- temporary teaser homepage at `/`, the preserved working homepage at `/home`, project and experiment detail routes, not-found route, and local-only playground route under `src/app/`
 - custom homepage, project-viewer, route-transition, and responsive styles under `src/app/globals.css`
 - locally hosted Young Serif and Junicode 2 variable font families under `public/fonts/`, including their SIL Open Font License text and source notes
 - local project hero imagery under `public/projects/`, with source notes for the copied workspace assets
@@ -72,6 +72,9 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Completed a voice pass across the three project and two experiment narratives, removing em dashes, en dashes, and formulaic language while preserving the facts and the distinct character of each story.
 - Verified all five revised pages in the Codex in-app browser at 1280px and 390px. The shared metadata structure, captions, document flow, and responsive widths passed with no console errors or horizontal overflow.
 - Passed `npm run lint`, `npm run typecheck`, and `npm run build` after the metadata and editorial pass.
+- Preserved the complete project-stack homepage at `/home` and replaced `/` with a temporary teaser containing the existing introduction, three text-only project links, and the shared footer.
+- Verified the teaser at 1280px and 390px and the preserved `/home` route at 390px in the Codex in-app browser. The project links, responsive columns, retained project and experiment cards, footer, and horizontal bounds passed without console errors.
+- Passed `npm run lint`, `npm run typecheck`, and `npm run build` after the homepage split.
 
 ## Not Started
 
@@ -85,6 +88,7 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 ## Next Likely Moves
 
 - Complete the separate real-asset pass, including sanitization, rights/provenance review, captions, and useful alt text.
+- Continue developing the full homepage at `/home`, then replace the temporary root teaser when that experience is ready to publish.
 - Perform a final editorial polish pass after reviewing the five published narratives in context with real media.
 - Connect the GitHub repo to Cloudflare Pages with build command `npm run build` and output directory `out`.
 - Add additional projects by creating MDX files and registering them in `src/lib/content.ts`.

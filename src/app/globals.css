@@ -130,6 +130,56 @@ ul {
   padding-top: clamp(72px, 12vw, 160px);
 }
 
+.teaser-home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding-bottom: clamp(36px, 6vw, 72px);
+  padding-top: clamp(72px, 12vw, 160px);
+}
+
+.teaser-projects {
+  margin-bottom: clamp(96px, 14vw, 180px);
+}
+
+.teaser-projects h2 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 500;
+  margin: 0 0 clamp(32px, 6vw, 72px);
+  max-width: none;
+  text-align: center;
+  width: 100%;
+}
+
+.teaser-project-list {
+  display: grid;
+  gap: clamp(40px, 6vw, 80px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.teaser-project-list a {
+  display: block;
+  font-family: var(--font-serif-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  text-align: center;
+  text-decoration: none;
+}
+
+.teaser-project-list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.teaser-project-list a:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 8px;
+}
+
 .home-page--loading .home-intro,
 .home-page--loading .recent-work,
 .home-page--loading .home-experiments,
@@ -1682,12 +1732,20 @@ button {
     padding-top: 72px;
   }
 
+  .teaser-home {
+    padding-top: 72px;
+  }
+
   .home-intro {
     margin-bottom: 72px;
   }
 
   .project-grid {
     gap: 64px;
+    grid-template-columns: 1fr;
+  }
+
+  .teaser-project-list {
     grid-template-columns: 1fr;
   }
 

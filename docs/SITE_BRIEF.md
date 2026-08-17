@@ -1,12 +1,12 @@
 # Site Brief
 
-Last updated: 2026-08-13
+Last updated: 2026-08-17
 
 ## Working Summary
 
 This repo is becoming a new personal website built with a static-exported Next.js app, repo-backed MDX content, and Cloudflare Pages deployment from GitHub.
 
-The first version is intentionally focused: a homepage, three complete project case studies, two complete experiment case studies, focused MDX files, and a local-only DialKit playground for later typography/style tuning.
+The first version is intentionally focused: three complete project case studies, two complete experiment case studies, focused MDX files, and a local-only DialKit playground for later typography/style tuning. While the full homepage continues to evolve at `/home`, the public root is a temporary teaser with the current introduction, three linked project names, and the shared footer.
 
 The site has entered an incremental design pass while keeping the visual system focused and repo-native. The first explicit typography direction pairs Junicode 2 with Young Serif.
 
@@ -21,7 +21,7 @@ The site has entered an incremental design pass while keeping the visual system 
 ## Early Non-Goals
 
 - Do not add a CMS, database, auth, analytics, payments, email capture, or deployment provider by default.
-- Do not turn the first screen into a generic landing page placeholder.
+- Keep the temporary public teaser specific to the real work instead of turning it into a generic coming-soon page.
 - Do not add Tailwind, shadcn, decorative cards, gradients, animation polish, or a finished visual system during bootstrap work.
 
 ## Product Questions
@@ -35,6 +35,7 @@ The site has entered an incremental design pass while keeping the visual system 
 ## Design Principles
 
 - Make the actual site experience the first screen.
+- Keep the current full homepage available at `/home` while the minimal teaser occupies `/`; replace the teaser when the full experience is ready to publish.
 - Evolve imagery, motion, typography, and interaction polish incrementally from explicit design requests.
 - Use Junicode 2 for the homepage description and project-page narrative body, and Young Serif for homepage project names, until further typography exploration changes those roles.
 - Open project pages with a free-flowing 60/40 landing composition: representative media on the left and the project title, concise introduction, and continuation CTA on the right. Stack that composition on smaller screens.

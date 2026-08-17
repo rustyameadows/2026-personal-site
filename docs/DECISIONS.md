@@ -223,3 +223,13 @@ Status: Accepted
 Decision: Store the complete public narratives and ordered media placements for all three featured projects and both featured experiments in their own MDX files. Render both content types through the shared case-study shell and a small set of reusable fact and figure components. Use the existing flat-gray PNG library for every media placement during this content pass; replace those files with selected, rights-reviewed assets in a separate pass.
 
 Rationale: The prior shared viewer hard-coded generic prose and made the five stories structurally interchangeable. Page-owned MDX keeps each editorial arc legible and maintainable while preserving a consistent responsive presentation and static export. Separating narrative integration from asset selection lets the complete site be reviewed now without inventing, generating, or prematurely clearing visuals.
+
+## 0023 - Publish A Temporary Root Teaser And Preserve The Working Homepage
+
+Date: 2026-08-17
+
+Status: Accepted
+
+Decision: Keep the complete existing homepage available at `/home` for continued design work. Use `/` as a temporary public teaser containing the current introduction, the three featured projects as a text-only serif grid, and the shared footer.
+
+Rationale: The case studies are ready to be accessible while the fuller homepage is still being developed. Giving the working homepage its own route preserves that work without requiring a separate branch, and the small root page provides a deliberate public entry point that can be replaced later.
