@@ -243,3 +243,13 @@ Status: Accepted
 Decision: Vendor the complete Familjen Grotesk Roman and Italic variable webfonts and use the family for the global sans role. This includes the teaser name and section labels as well as case-study headings, facts, captions, navigation, and interface text that share the sans token. Keep the system-font stack as a fallback.
 
 Rationale: Familjen Grotesk has enough distinctive character at display sizes to make the site feel authored while remaining sturdy and readable for smaller interface text. Its compact proportions and large ink traps balance Young Serif and Junicode 2 without imitating either family.
+
+## 0025 - Canonicalize WWW At The Cloudflare Edge
+
+Date: 2026-08-17
+
+Status: Accepted
+
+Decision: Treat `https://rustymeadows.com/` as the canonical public origin. Match `www.rustymeadows.com` at the Cloudflare edge and issue a permanent redirect directly to the HTTPS apex while preserving the incoming path and query string. Keep `www` proxied through Cloudflare with an originless documentation-address A record instead of routing it through the preserved GitHub Pages deployment.
+
+Rationale: The old proxied CNAME made every `www` request depend on GitHub Pages before reaching the canonical domain. Handling the redirect entirely at Cloudflare removes that runtime dependency, produces a single predictable redirect for both HTTP and HTTPS, and leaves the old repository and deployment available as an untouched rollback reference.

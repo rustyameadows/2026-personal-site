@@ -59,7 +59,7 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [x] Add deployment configuration.
 - [x] Add preview deployment workflow.
 - [x] Add production build verification.
-- [ ] Move `www.rustymeadows.com` from its preserved GitHub Pages redirect to Cloudflare Pages.
+- [x] Move `www.rustymeadows.com` off its preserved GitHub Pages redirect and canonicalize it at the Cloudflare edge.
 - [ ] Add environment-variable guidance if needed.
 
 ## App Foundation
