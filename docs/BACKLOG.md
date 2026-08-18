@@ -30,7 +30,7 @@ This backlog tracks the personal site and the agentic workflow around it.
 - [ ] Replace all gray case-study media placements with the separate sanitized, rights-aware real-asset edit.
 - [ ] Replace the provisional experiment asset captions where needed, then add provenance notes and meaningful alt text with the real visual assets.
 - [ ] Add the confirmed Little Plains contributor credits and collective-article link when available.
-- [x] Replace the placeholder contact email with the final public address, `Rusty@RustyMeadows.com`.
+- [x] Replace the placeholder contact email with the final public address, `rusty@rustymeadows.com`.
 
 ## Design Direction
 

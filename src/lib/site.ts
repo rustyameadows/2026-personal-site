@@ -1,1 +1,1 @@
-export const publicContactEmail = "Rusty@RustyMeadows.com";
+export const publicContactEmail = "rusty@rustymeadows.com";

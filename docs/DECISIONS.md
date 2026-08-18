@@ -260,6 +260,6 @@ Date: 2026-08-18
 
 Status: Accepted
 
-Decision: Use `Rusty@RustyMeadows.com` as the public contact address throughout the site. Keep it in one shared source value for footer and project clipboard actions and experiment-page email links.
+Decision: Use `rusty@rustymeadows.com` as the public contact address throughout the site. Keep it in one shared source value for footer and project clipboard actions and experiment-page email links.
 
 Rationale: The site no longer needs the temporary `hello@rustymeadows.com` placeholder. A shared value keeps every contact surface consistent as the site grows.
