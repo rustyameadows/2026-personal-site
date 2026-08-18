@@ -55,10 +55,11 @@ This backlog tracks the personal site and the agentic workflow around it.
 ## Hosting And Deployment
 
 - [x] Choose hosting provider.
-- [ ] Decide domain and DNS path.
-- [ ] Add deployment configuration.
-- [ ] Add preview deployment workflow.
-- [ ] Add production build verification.
+- [x] Decide domain and DNS path.
+- [x] Add deployment configuration.
+- [x] Add preview deployment workflow.
+- [x] Add production build verification.
+- [ ] Move `www.rustymeadows.com` from its preserved GitHub Pages redirect to Cloudflare Pages.
 - [ ] Add environment-variable guidance if needed.
 
 ## App Foundation

@@ -31,7 +31,7 @@ Current contents:
 - complete MDX narratives for three projects and two experiments, rendered through one shared case-study page system
 - reusable facts, figure, and figure-grid components backed by the existing flat-gray PNG placeholder library
 
-Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-only DialKit playground, and Cloudflare Pages.
+Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-only DialKit playground, and Cloudflare Pages. The production site is live at `https://rustymeadows.com/` from the `main` branch of `rustyameadows/2026-personal-site`.
 
 ## Done
 
@@ -83,6 +83,7 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Verified all six rendered URLs, `_blank` targets, `noopener noreferrer` relationships, labels, and responsive bounds in the Codex in-app browser at 1440×900 and 390px. Lint, typecheck, the production build, and the browser console passed.
 - Added the Young Serif `↗` glyph to all six external links. The arrows are hidden at rest, then appear in the subhead gray and grow into place on hover or keyboard focus. Verified the revised treatment at 1440×900 and 390px with no horizontal overflow or browser console errors; lint, typecheck, and the production build passed.
 - Vendored the complete Familjen Grotesk Roman and Italic variable webfonts and made the family the site-wide sans role, replacing the generic system face across the teaser name, section labels, case-study titles, metadata, captions, navigation, and interface text. Verified the teaser at 1440×900 and 390px, the preserved `/home` route at 390px, and the Little Plains case study at 1280px and 390px with the intended serif roles unchanged, no horizontal overflow, and no browser console errors. Lint, typecheck, and the production build passed.
+- Connected `rustyameadows/2026-personal-site` to the Cloudflare Pages project `rustymeadows` with automatic GitHub deployments from `main`, `npm run build`, the `out` publish directory, and Node 22. Verified the Pages preview, production homepage, representative project and experiment routes, HTTPS redirect, SSL, and real 404 behavior. Activated `rustymeadows.com` on Cloudflare Pages without deleting or disabling the previous 2025 repo or GitHub Pages deployment.
 
 ## Not Started
 
@@ -91,14 +92,13 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Continue evaluating the emerging typography direction before extending it to additional roles.
 - Replace the temporary gray case-study images with the separate, rights-aware real-asset edit.
 - Add accessibility checks beyond lint/typecheck/build.
-- Add CI and deploy preview checks.
+- Add CI checks beyond the automatic Cloudflare Pages build and deploy previews.
 
 ## Next Likely Moves
 
 - Complete the separate real-asset pass, including sanitization, rights/provenance review, captions, and useful alt text.
 - Continue developing the full homepage at `/home`, then replace the temporary root teaser when that experience is ready to publish.
 - Perform a final editorial polish pass after reviewing the five published narratives in context with real media.
-- Connect the GitHub repo to Cloudflare Pages with build command `npm run build` and output directory `out`.
 - Add additional projects by creating MDX files and registering them in `src/lib/content.ts`.
 - Use `/playground` later only when intentionally starting typography or CSS exploration.
 
@@ -108,6 +108,7 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - What public identity, tone, and visual style should the site express?
 - Which real visual assets should replace each gray case-study placement, and which require sanitization or rights confirmation?
 - What final public contact address should replace `hello@rustymeadows.com`?
+- Should `www.rustymeadows.com` move fully to Cloudflare Pages? It currently works by redirecting through the preserved GitHub Pages setup, so that hostname still has a GitHub dependency.
 - Should future project registration stay explicit or move to a file discovery helper once there are more than a handful of pages?
 
 ## Update Rules
