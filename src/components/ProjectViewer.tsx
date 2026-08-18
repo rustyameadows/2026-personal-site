@@ -22,6 +22,7 @@ import {
   shouldHandleRouteTransitionClick,
   startRouteTransition
 } from "@/lib/routeTransitions";
+import { publicContactEmail } from "@/lib/site";
 
 type ProjectViewerProps = {
   children?: ReactNode;
@@ -39,7 +40,6 @@ const defaultProjectSections: ProjectSection[] = [
 ];
 
 const placeholderLayouts = ["intro", "image", "detail", "notes"] as const;
-const placeholderContactEmail = "hello@rustymeadows.com";
 
 const placeholderAssets = {
   bannerDark: {
@@ -704,7 +704,7 @@ export function ProjectViewer({
     }
 
     try {
-      await copyTextToClipboard(placeholderContactEmail);
+      await copyTextToClipboard(publicContactEmail);
       setContactToast("Email copied to clipboard");
     } catch {
       setContactToast("Couldn’t copy email");

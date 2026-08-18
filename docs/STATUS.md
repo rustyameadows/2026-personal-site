@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-08-17
+Last updated: 2026-08-18
 
 ## Current State
 
@@ -85,6 +85,7 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Vendored the complete Familjen Grotesk Roman and Italic variable webfonts and made the family the site-wide sans role, replacing the generic system face across the teaser name, section labels, case-study titles, metadata, captions, navigation, and interface text. Verified the teaser at 1440×900 and 390px, the preserved `/home` route at 390px, and the Little Plains case study at 1280px and 390px with the intended serif roles unchanged, no horizontal overflow, and no browser console errors. Lint, typecheck, and the production build passed.
 - Connected `rustyameadows/2026-personal-site` to the Cloudflare Pages project `rustymeadows` with automatic GitHub deployments from `main`, `npm run build`, the `out` publish directory, and Node 22. Verified the Pages preview, production homepage, representative project and experiment routes, HTTPS redirect, SSL, and real 404 behavior. Activated `rustymeadows.com` on Cloudflare Pages without deleting or disabling the previous 2025 repo or GitHub Pages deployment.
 - Removed the remaining GitHub dependency from `www.rustymeadows.com`. A Cloudflare Single Redirect now sends both HTTP and HTTPS requests directly to the canonical HTTPS apex while preserving paths and query strings, and the proxied `www` DNS record is an originless documentation-address placeholder rather than a GitHub Pages CNAME. Verified root and deep-link redirects, a one-hop final 200 response, and the absence of GitHub/Fastly response headers. The previous 2025 repo and GitHub Pages deployment remain intact.
+- Replaced the temporary `hello@rustymeadows.com` contact address with the final public address, `Rusty@RustyMeadows.com`. The shared footer, project-page clipboard action, and experiment-page mail link now use one shared source value.
 
 ## Not Started
 
@@ -108,7 +109,6 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - What should the personal site primarily do: portfolio, writing hub, creative playground, resume/contact surface, experiments, or a blend?
 - What public identity, tone, and visual style should the site express?
 - Which real visual assets should replace each gray case-study placement, and which require sanitization or rights confirmation?
-- What final public contact address should replace `hello@rustymeadows.com`?
 - Should future project registration stay explicit or move to a file discovery helper once there are more than a handful of pages?
 
 ## Update Rules

@@ -253,3 +253,13 @@ Status: Accepted
 Decision: Treat `https://rustymeadows.com/` as the canonical public origin. Match `www.rustymeadows.com` at the Cloudflare edge and issue a permanent redirect directly to the HTTPS apex while preserving the incoming path and query string. Keep `www` proxied through Cloudflare with an originless documentation-address A record instead of routing it through the preserved GitHub Pages deployment.
 
 Rationale: The old proxied CNAME made every `www` request depend on GitHub Pages before reaching the canonical domain. Handling the redirect entirely at Cloudflare removes that runtime dependency, produces a single predictable redirect for both HTTP and HTTPS, and leaves the old repository and deployment available as an untouched rollback reference.
+
+## 0026 - Use The Final Public Contact Address
+
+Date: 2026-08-18
+
+Status: Accepted
+
+Decision: Use `Rusty@RustyMeadows.com` as the public contact address throughout the site. Keep it in one shared source value for footer and project clipboard actions and experiment-page email links.
+
+Rationale: The site no longer needs the temporary `hello@rustymeadows.com` placeholder. A shared value keeps every contact surface consistent as the site grows.

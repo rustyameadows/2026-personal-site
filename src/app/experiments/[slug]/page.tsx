@@ -9,6 +9,7 @@ import {
   experiments,
   getExperimentBySlug
 } from "@/lib/content";
+import { publicContactEmail } from "@/lib/site";
 
 type ExperimentPageProps = {
   params: Promise<{
@@ -61,7 +62,7 @@ export default async function ExperimentPage({ params }: ExperimentPageProps) {
         <nav aria-label="Site navigation">
           <Link href="/#projects">Projects</Link>
           <Link href="/#experiments">Experiments</Link>
-          <a href="mailto:hello@rustymeadows.com">Contact</a>
+          <a href={`mailto:${publicContactEmail}`}>Contact</a>
         </nav>
       </header>
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const placeholderContactEmail = "hello@rustymeadows.com";
+import { publicContactEmail } from "@/lib/site";
 
 async function copyTextToClipboard(text: string) {
   if (navigator.clipboard?.writeText) {
@@ -44,7 +44,7 @@ export function SiteFooter() {
     }
 
     try {
-      await copyTextToClipboard(placeholderContactEmail);
+      await copyTextToClipboard(publicContactEmail);
       setContactToast("Email copied to clipboard");
     } catch {
       setContactToast("Couldn’t copy email");
