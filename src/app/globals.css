@@ -36,10 +36,28 @@
   font-weight: 300 700;
 }
 
+@font-face {
+  font-family: "Familjen Grotesk";
+  src: url("/fonts/familjen-grotesk/FamiljenGrotesk-Variable-Roman.woff2")
+    format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 700;
+}
+
+@font-face {
+  font-family: "Familjen Grotesk";
+  src: url("/fonts/familjen-grotesk/FamiljenGrotesk-Variable-Italic.woff2")
+    format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400 700;
+}
+
 :root {
   color-scheme: light;
-  --font-sans-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-sans-ui: "Familjen Grotesk", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif-body: "Junicode 2", Georgia, serif;
   --font-serif-display: "Young Serif", Georgia, serif;
   font-family: var(--font-sans-ui);
@@ -139,45 +157,87 @@ ul {
 }
 
 .teaser-projects {
-  margin-bottom: clamp(96px, 14vw, 180px);
+  margin-bottom: clamp(56px, 5vw, 72px);
 }
 
 .teaser-projects h2 {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: 500;
-  margin: 0 0 clamp(32px, 6vw, 72px);
+  color: #555;
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  margin: 0 0 clamp(28px, 3vw, 40px);
   max-width: none;
-  text-align: center;
+  text-align: left;
   width: 100%;
+}
+
+.teaser-project-groups {
+  column-gap: clamp(64px, 10vw, 160px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: clamp(64px, 8vw, 96px);
+}
+
+.teaser-project-group {
+  border-top: 1px solid #c9c9c9;
+  min-width: 0;
+  padding-top: clamp(14px, 1.5vw, 20px);
 }
 
 .teaser-project-list {
   display: grid;
-  gap: clamp(40px, 6vw, 80px);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   list-style: none;
   margin: 0;
   padding: 0;
+  row-gap: clamp(18px, 2vw, 26px);
+}
+
+.teaser-project-list li {
+  font-family: var(--font-serif-display);
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.04;
+  text-align: left;
+  text-wrap: balance;
 }
 
 .teaser-project-list a {
-  display: block;
-  font-family: var(--font-serif-display);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 400;
-  line-height: 1.08;
-  text-align: center;
+  color: inherit;
   text-decoration: none;
+}
+
+.teaser-project-list a::after {
+  content: "↗";
+  display: inline-block;
+  color: #555;
+  font-family: var(--font-serif-display);
+  font-size: 0.6em;
+  line-height: 1;
+  margin-left: 0.34em;
+  opacity: 0;
+  transform: translateY(-0.02em) scale(0.82);
+  transform-origin: center;
+  transition:
+    opacity 120ms ease-out,
+    transform 140ms ease-out;
+  vertical-align: middle;
 }
 
 .teaser-project-list a:hover {
   text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+.teaser-project-list a:hover::after,
+.teaser-project-list a:focus-visible::after {
+  opacity: 1;
+  transform: translateY(-0.02em) scale(1.14);
 }
 
 .teaser-project-list a:focus-visible {
-  outline: 2px solid black;
-  outline-offset: 8px;
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
 }
 
 .home-page--loading .home-intro,
@@ -206,12 +266,6 @@ ul {
   text-align: center;
 }
 
-.home-eyebrow {
-  font-family: var(--font-serif-body);
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  margin: 0 auto 18px;
-}
-
 .home-intro h1 {
   font-size: clamp(4rem, 12vw, 8.5rem);
   font-weight: 500;
@@ -221,7 +275,7 @@ ul {
   max-width: 9ch;
 }
 
-.home-intro p:not(.home-eyebrow) {
+.home-intro p {
   font-family: var(--font-serif-body);
   font-size: clamp(1.2rem, 2.2vw, 1.8rem);
   line-height: 1.45;
@@ -1721,6 +1775,11 @@ button {
   .project-overlay__grid--projects {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .teaser-project-groups {
+    grid-template-columns: 1fr;
+    row-gap: 72px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1746,7 +1805,7 @@ button {
   }
 
   .teaser-project-list {
-    grid-template-columns: 1fr;
+    row-gap: 28px;
   }
 
   .experiment-grid {

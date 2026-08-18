@@ -1,9 +1,20 @@
 # Vendored type families
 
 The application ships the complete variable webfont families rather than only
-the instances currently selected in the UI. Both families are licensed under
-the SIL Open Font License 1.1; the upstream license text is included beside
-each family.
+the instances currently selected in the UI. All three families are licensed
+under the SIL Open Font License 1.1; the upstream license text is included
+beside each family.
+
+## Familjen Grotesk
+
+- Source: https://github.com/Familjen-Sthlm/Familjen-Grotesk
+- Upstream commit: `de7dfe09f6014e43bfad3724ac4a07b95972763c`
+  (2023-06-17)
+- Files: upstream `fonts/fonts 13.03.40/variable/FamiljenGrotesk[wght].woff2`
+  and `fonts/fonts 13.03.40/variable/FamiljenGrotesk-Italic[wght].woff2`
+- Family coverage: Regular through Bold weights in Roman and Italic styles,
+  including the family’s large ink traps, high x-height, and complete bundled
+  OpenType character and feature set
 
 ## Junicode 2
 

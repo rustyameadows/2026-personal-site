@@ -233,3 +233,13 @@ Status: Accepted
 Decision: Keep the complete existing homepage available at `/home` for continued design work. Use `/` as a temporary public teaser containing the current introduction, the three featured projects as a text-only serif grid, and the shared footer.
 
 Rationale: The case studies are ready to be accessible while the fuller homepage is still being developed. Giving the working homepage its own route preserves that work without requiring a separate branch, and the small root page provides a deliberate public entry point that can be replaced later.
+
+## 0024 - Use Familjen Grotesk For The Global Sans Role
+
+Date: 2026-08-17
+
+Status: Accepted
+
+Decision: Vendor the complete Familjen Grotesk Roman and Italic variable webfonts and use the family for the global sans role. This includes the teaser name and section labels as well as case-study headings, facts, captions, navigation, and interface text that share the sans token. Keep the system-font stack as a fallback.
+
+Rationale: Familjen Grotesk has enough distinctive character at display sizes to make the site feel authored while remaining sturdy and readable for smaller interface text. Its compact proportions and large ink traps balance Young Serif and Junicode 2 without imitating either family.

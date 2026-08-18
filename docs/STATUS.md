@@ -18,7 +18,7 @@ Current contents:
 - explicit content registry under `src/lib/content.ts`
 - temporary teaser homepage at `/`, the preserved working homepage at `/home`, project and experiment detail routes, not-found route, and local-only playground route under `src/app/`
 - custom homepage, project-viewer, route-transition, and responsive styles under `src/app/globals.css`
-- locally hosted Young Serif and Junicode 2 variable font families under `public/fonts/`, including their SIL Open Font License text and source notes
+- locally hosted Familjen Grotesk, Young Serif, and Junicode 2 variable font families under `public/fonts/`, including their SIL Open Font License text and source notes
 - local project hero imagery under `public/projects/`, with source notes for the copied workspace assets
 - DialKit dependency for the local-only playground
 - lightweight `.gitignore` for likely future JavaScript/static-site tooling
@@ -75,6 +75,14 @@ Selected stack: Next.js static export, npm, MDX files, minimal plain CSS, local-
 - Preserved the complete project-stack homepage at `/home` and replaced `/` with a temporary teaser containing the existing introduction, three text-only project links, and the shared footer.
 - Verified the teaser at 1280px and 390px and the preserved `/home` route at 390px in the Codex in-app browser. The project links, responsive columns, retained project and experiment cards, footer, and horizontal bounds passed without console errors.
 - Passed `npm run lint`, `npm run typecheck`, and `npm run build` after the homepage split.
+- Organized the temporary teaser into separate **Select Work** and **Select Projects** sections. The five selected clients and four selected projects appear as two side-by-side, left-aligned vertical lists on desktop that stack on smaller screens. Smaller dark-gray labels, light-gray hairlines, tighter list spacing, and the reordered work list establish the grayscale hierarchy.
+- Verified the grouped teaser in the Codex in-app browser at 1440×1372 and 390px. The requested client and project membership, Little Plains-first ordering, two-column desktop split, mobile stack, label hierarchy, external-link behavior, horizontal bounds, and browser console all passed. The desktop page fits its reference-height viewport without scrolling.
+- Passed `npm run lint`, `npm run typecheck`, and `npm run build` after the grouped client and project pass.
+- Removed the redundant “Hi, I’m” eyebrow from the teaser hero, leaving the name as the direct opening. Verified the simplified hero at 1440×900 and 390px with balanced spacing, no horizontal overflow, and no browser console errors; lint, typecheck, and the production build passed.
+- Linked Pineapple Productions, Little Plains, Sugar Paper, I’ve Seen the Future / Interpolations, Explore Art, and Roman and Williams GUILD to their verified public sites. Roman and Williams points directly to the official Guild Shop page. Each opens in a new tab with explicit accessible labeling, a hover underline, and a keyboard-focus outline; the Roman and Williams label now uses **GUILD**.
+- Verified all six rendered URLs, `_blank` targets, `noopener noreferrer` relationships, labels, and responsive bounds in the Codex in-app browser at 1440×900 and 390px. Lint, typecheck, the production build, and the browser console passed.
+- Added the Young Serif `↗` glyph to all six external links. The arrows are hidden at rest, then appear in the subhead gray and grow into place on hover or keyboard focus. Verified the revised treatment at 1440×900 and 390px with no horizontal overflow or browser console errors; lint, typecheck, and the production build passed.
+- Vendored the complete Familjen Grotesk Roman and Italic variable webfonts and made the family the site-wide sans role, replacing the generic system face across the teaser name, section labels, case-study titles, metadata, captions, navigation, and interface text. Verified the teaser at 1440×900 and 390px, the preserved `/home` route at 390px, and the Little Plains case study at 1280px and 390px with the intended serif roles unchanged, no horizontal overflow, and no browser console errors. Lint, typecheck, and the production build passed.
 
 ## Not Started
 
