@@ -20,11 +20,11 @@ const selectWorkGroups = [
     id: "projects",
     title: "Select Projects",
     items: [
+      { label: "Explore Art", href: "https://explore-art.com/" },
       {
         label: "Interpolations",
         href: "https://iveseenthefuture.com/"
       },
-      { label: "Explore Art", href: "https://explore-art.com/" },
       { label: "Reveal" },
       { label: "Nearly Impossible" }
     ]
